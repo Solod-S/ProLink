@@ -6,6 +6,7 @@ export const GlobalStyle = createGlobalStyle`
 
 
 :root {
+
   --toastify-color-success: #2196f3;
   --toastify-color-error: #2F303A;
 }
@@ -15,6 +16,9 @@ export const GlobalStyle = createGlobalStyle`
     color: ${(p) => p.theme.colors.primaryAccentColor};
     }
 }
+
+
+
 h1,
 h2,
 h3,
@@ -52,7 +56,7 @@ button {
 body {
   scroll-behavior: smooth;
   margin: 0;
-  background-color:  ${(p) => p.theme.colors.primaryWhiteColor};
+  background-color:  ${(p) => p.theme.colors.primaryBgColor};
   color: ${(p) => p.theme.colors.primaryTextColor};
 
   font-family: ${(p) => p.theme.fontFamily.roboto};

@@ -1,11 +1,12 @@
 export const theme = {
   colors: {
+    primaryBgColor: "#F5F5F5",
+
     primaryAccentColor: "#2196f3",
     primaryWhiteColor: "#ffffff",
     primaryBlackColor: "#000000",
     primaryTextColor: "#757575",
     primaryTitleColor: "#212121",
-    primaryBgColor: "#f5f4fa",
     secondaryBgColor: "#2f303a",
     thrdBgColor: "#afb1b8",
     labelColor: "#757575",

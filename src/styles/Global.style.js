@@ -11,11 +11,6 @@ export const GlobalStyle = createGlobalStyle`
   --toastify-color-error: #2F303A;
 }
 
-.--mobile-modificator {
-  @media screen and (max-width: ${(p) => p.theme.breakpoints.beeforeTablet}) {
-    color: ${(p) => p.theme.colors.primaryAccentColor};
-    }
-}
 
 
 
@@ -54,73 +49,17 @@ button {
 }
 
 body {
-  scroll-behavior: smooth;
+   scroll-behavior: smooth;
   margin: 0;
   background-color:  ${(p) => p.theme.colors.primaryBgColor};
   color: ${(p) => p.theme.colors.primaryTextColor};
 
-  font-family: ${(p) => p.theme.fontFamily.roboto};
-  scroll-behavior: smooth;
+  font-family: ${(p) => p.theme.fontFamily.arial};
 }
 
 .img {
   display: block;
   max-width: 100%;
   height: auto;
-}
-.container {
-  padding-left: ${(p) => p.theme.space[4]}px;
-  padding-right: ${(p) => p.theme.space[4]}px;
-  margin-left: auto;
-  margin-right: auto;
-
-  @media screen and (min-width: ${(p) => p.theme.breakpoints.tell}) {
-    width: ${(p) => p.theme.breakpoints.tell};
-  }
-  @media screen and (min-width: ${(p) => p.theme.breakpoints.tablet}) {
-    width: ${(p) => p.theme.breakpoints.tablet};
-  }
-  @media screen and (min-width: ${(p) => p.theme.breakpoints.desktop}) {
-    width: ${(p) => p.theme.breakpoints.desktop};
-  }
-}
-
-.section {
-  padding-top: ${(p) => p.theme.space[6]}px;
-  padding-bottom: ${(p) => p.theme.space[6]}px;
-  @media screen and (min-width: ${(p) => p.theme.breakpoints.tablet}) {
-    padding-top: ${(p) => p.theme.space[6]}px;
-    padding-bottom: ${(p) => p.theme.space[6]}px;
-  }
-  @media screen and (min-width: ${(p) => p.theme.breakpoints.desktop}) {
-    padding-top: ${(p) => p.theme.space[7]}px;
-    padding-bottom: ${(p) => p.theme.space[7]}px;
-  }
-}
-
-.accentColor {
-    color: ${(p) => p.theme.colors.primaryAccentColor};
-  }
-
-.--isOpen {
-  display: flex;
-  flex-direction: column;
-  position: fixed;
-  z-index: 4;
-  top: 0;
-  left: 0;
-  transform: translateX(0%);
-  background-color:  ${(p) => p.theme.colors.primaryWhiteColor};
-  width: 100%;
-  height: 100%;
-  padding: 25px;
-
-
-  @media screen and (min-width: ${(p) => p.theme.breakpoints.tablet}) {
-    display: contents;
-  }
-}
-.no-scroll {
-  overflow: hidden;
 }
 `;

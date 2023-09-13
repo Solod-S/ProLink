@@ -1,9 +1,9 @@
-import { LoginComponent } from "../../components";
+import { Login } from "../../components";
 
 function LoginPage() {
   return (
     <>
-      <LoginComponent />
+      <Login />
     </>
   );
 }

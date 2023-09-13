@@ -1,14 +1,14 @@
 import { Route, Routes } from "react-router-dom";
-import { SharedLayout } from "./components";
+import { SharedLayout, AppBar } from "./components";
 
 import { LoginPage, HomePage } from "./pages";
 
 function App() {
   return (
     <Routes>
-      <Route path="/login" element={<LoginPage />} />
+      <Route index element={<LoginPage />} />
       <Route path="/" element={<SharedLayout />}>
-        <Route index path="/home" element={<HomePage />} />
+        <Route path="/home" element={<HomePage />} />
       </Route>
     </Routes>
   );

@@ -1,12 +1,21 @@
 import styled from "styled-components";
 import { NavLink } from "react-router-dom";
 
+
+import logo from "../../../../src/img/login-logo.png";
+import hero from "../../../../src/img/login-hero.svg";
+import google from "../../../../src/img/google.svg";
+import linkedIn from "../../../../src/img/linkedIn.svg";
+import facebook from "../../../../src/img/facebook.svg";
+
+export { logo, hero, google, linkedIn, facebook };
+
 export const Container = styled.div`
   padding: 0;
 `;
 
 export const Nav = styled.nav`
-  max-width: 1128px;
+  max-width: ${(p) => p.theme.breakpoints.desktop};
   margin: auto;
   padding: 12px 0 16px;
   display: flex;
@@ -17,7 +26,7 @@ export const Nav = styled.nav`
   /* & > a{
     width: 135px;
     height: 34px;
-    @media (max-width: 768px) {
+    @media (max-width: ${(p) => p.theme.breakpoints.tablet}) {
       padding: 0 5px;
     }
   } */
@@ -28,7 +37,7 @@ export const Link = styled(NavLink)`
   width: 135px;
   height: 34px;
 
-  @media (max-width: 768px) {
+  @media (max-width: ${(p) => p.theme.breakpoints.tablet}) {
     padding: 0 5px;
   }
 `;
@@ -49,7 +58,7 @@ export const Joint = styled(NavLink)`
     text-decoration: none;
   }
 
-  @media (max-width: 768px) {
+  @media (max-width: ${(p) => p.theme.breakpoints.tablet}) {
     padding: 0 5px;
   }
 `;
@@ -57,8 +66,8 @@ export const SignIn = styled(NavLink)`
   width: 135px;
   height: 34px;
   text-decoration: none;
-  box-shadow: inset 0 0 0 1px #0a66c2;
-  color: #0a66c2;
+  box-shadow: inset 0 0 0 1px ${(p) => p.theme.colors.secondTextColor};
+  color: ${(p) => p.theme.colors.secondTextColor};
   border-radius: 24px;
   transition-duration: 167ms;
   font-size: 16px;
@@ -69,14 +78,42 @@ export const SignIn = styled(NavLink)`
   background-color: rgba(0, 0, 0, 0);
   &:hover {
     background-color: rgba(112, 181, 249, 0.15);
-    color: #0a66c2;
+    color: ${(p) => p.theme.colors.secondTextColor};
     text-decoration: none;
   }
 
-  @media (max-width: 768px) {
+  @media (max-width: ${(p) => p.theme.breakpoints.tablet}) {
     padding: 3px 5px;
   }
 `;
+
+export const SocialLogin = styled.a`
+  width: 135px;
+  height: 34px;
+  margin-left: 5px;
+  text-decoration: none;
+  box-shadow: inset 0 0 0 1px ${(p) => p.theme.colors.secondTextColor};
+  color: ${(p) => p.theme.colors.fourthTextColor};
+  border-radius: 24px;
+  transition-duration: 167ms;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 40px;
+  padding: 10px 24px;
+  text-align: center;
+  cursor: pointer;
+  background-color: ${(p) => p.theme.colors.secondTextColor};
+  &:hover {
+    background-color: rgba(112, 181, 249, 0.15);
+    color: ${(p) => p.theme.colors.secondTextColor};
+    text-decoration: none;
+  }
+
+  @media (max-width: ${(p) => p.theme.breakpoints.tablet}) {
+    padding: 3px 5px;
+  }
+`;
+
 export const Section = styled.section`
   display: flex;
   align-content: flex-start;
@@ -86,11 +123,11 @@ export const Section = styled.section`
   padding: 60px 0;
   flex-wrap: wrap;
   width: 100%;
-  max-width: 1128px;
+  max-width: ${(p) => p.theme.breakpoints.desktop};
   align-items: center;
   margin: auto;
 
-  @media (max-width: 768px) {
+  @media (max-width: ${(p) => p.theme.breakpoints.tablet}) {
     margin: auto;
     min-height: 0px;
   }
@@ -102,10 +139,10 @@ export const Hero = styled.div`
     padding-bottom: 0;
     width: 55%;
     font-size: 56px;
-    color: #2977c9;
+    color: ${(p) => p.theme.colors.thirdTextColor};
     font-weight: 200;
     line-height: 70px;
-    @media (max-width: 768px) {
+    @media (max-width: ${(p) => p.theme.breakpoints.tablet}) {
       text-align: center;
       font-size: 20px;
       width: 100%;
@@ -118,7 +155,7 @@ export const Hero = styled.div`
       position: absolute;
       bottom: -2px;
       right: -150px;
-      @media (max-width: 768px) {
+      @media (max-width: ${(p) => p.theme.breakpoints.tablet}) {
         top: 230px;
         width: initial;
         position: initial;
@@ -128,9 +165,11 @@ export const Hero = styled.div`
   }
 `;
 export const Form = styled.div`
-  margin-top: 100px;
+  /* margin-top: 100px; */
+  padding-left: 10px;
   max-width: 400px;
-  @media (max-width: 768px) {
+  @media (max-width: ${(p) => p.theme.breakpoints.tablet}) {
+    padding-left: 0;
     margin-top: 20px;
   }
 `;

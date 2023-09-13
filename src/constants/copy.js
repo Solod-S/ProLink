@@ -1,19 +1,23 @@
 export const theme = {
   colors: {
     primaryBgColor: "#F5F5F5",
-    secondBgColor: "#eef3f8",
-    thirdBgColor: "white",
+
+    primaryAccentColor: "#2196f3",
+    primaryWhiteColor: "#ffffff",
+    primaryBlackColor: "#000000",
     primaryTextColor: "#757575",
-    secondTextColor: "#0a66c2",
-    thirdTextColor: "#2977c9",
-    fourthTextColor: "white",
-    borderColor: "#000000E6",
-    // rgba(0, 0, 0, 0.9)
+    primaryTitleColor: "#212121",
+    secondaryBgColor: "#2f303a",
+    thrdBgColor: "#afb1b8",
+    labelColor: "#757575",
   },
-  breakpoints: {
-    mobile: "478px",
+  bp: {
+    beeforeTell: "479px",
+    tell: "480px",
+    beeforeTablet: "767px",
     tablet: "768px",
-    desktop: "1128px",
+    beeforeDesktop: "1199px",
+    desktop: "1600px",
   },
   spacing: (value) => `${4 * value}px`,
   space: [0, 2, 4, 8, 15, 32, 60, 94, 128, 256],
@@ -43,6 +47,6 @@ export const theme = {
   },
   fontFamily: {
     raleway: "'Raleway', sans-serif",
-    arial: "Arial,sans-serif",
+    roboto: "'Roboto', sans-serif",
   },
 };

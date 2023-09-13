@@ -1,20 +1,20 @@
 import {
+  logo,
+  hero,
+  google,
+  linkedIn,
+  facebook,
   Container,
   Nav,
   Link,
   Joint,
   SignIn,
+  SocialLogin,
   Section,
   Hero,
   Form,
   SocialBtn,
-} from "./LoginComponent.styled";
-
-import logo from "../../../src/img/login-logo.png";
-import hero from "../../../src/img/login-hero.svg";
-import google from "../../../src/img/google.svg";
-import linkedIn from "../../../src/img/linkedIn.svg";
-import facebook from "../../../src/img/facebook.svg";
+} from "./Login.styled";
 
 const LoginComponent = () => {
   return (
@@ -26,6 +26,7 @@ const LoginComponent = () => {
         <div>
           <Joint>Joint now</Joint>
           <SignIn>Sign in</SignIn>
+          <SocialLogin href="#social_login">Social login</SocialLogin>
         </div>
       </Nav>
       <Section>
@@ -34,7 +35,7 @@ const LoginComponent = () => {
           <img src={hero} alt="hero" />
         </Hero>
       </Section>
-      <Form>
+      <Form id="social_login">
         <SocialBtn>
           <img src={google} alt="google" /> Sign in with Google
         </SocialBtn>

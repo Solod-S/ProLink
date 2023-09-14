@@ -2,13 +2,16 @@ export const theme = {
   colors: {
     primaryBgColor: "#F5F5F5",
     secondBgColor: "#eef3f8",
-    thirdBgColor: "white",
+    thirdBgColor: "#fff",
+    fourthBgColor: "#f9fafb",
     primaryTextColor: "#757575",
     secondTextColor: "#0a66c2",
     thirdTextColor: "#2977c9",
-    fourthTextColor: "white",
-    borderColor: "#000000E6",
+    fourthTextColor: "#fff",
+    boldTextColor: "#434649",
+    bordeFontrColor: "#000000E6",
     // rgba(0, 0, 0, 0.9)
+    placeHolderColor: "#958b7b",
   },
   breakpoints: {
     mobile: "478px",
@@ -32,14 +35,19 @@ export const theme = {
     xxxxxl: "44px",
   },
   fontWeight: {
+    thin: 200,
+    сommon: 400,
     normal: 500,
+    regular: 600,
     bolt: 700,
     superBolt: 900,
   },
   radii: {
     none: "0",
+    small: "2px",
     normal: "4px",
     round: "50%",
+    quarter: "24px",
   },
   fontFamily: {
     raleway: "'Raleway', sans-serif",

@@ -1,7 +1,6 @@
 import styled from "styled-components";
 import { NavLink } from "react-router-dom";
 
-
 import logo from "../../../../src/img/login-logo.png";
 import hero from "../../../../src/img/login-hero.svg";
 import google from "../../../../src/img/google.svg";
@@ -54,7 +53,7 @@ export const Joint = styled(NavLink)`
   transition: background-color 167ms linear, color 167ms linear;
   &:hover {
     background-color: rgba(0, 0, 0, 0.08);
-    color: rgba(0, 0, 0, 0.9);
+    color: ${(p) => p.theme.colors.bordeFontrColor};
     text-decoration: none;
   }
 
@@ -68,10 +67,10 @@ export const SignIn = styled(NavLink)`
   text-decoration: none;
   box-shadow: inset 0 0 0 1px ${(p) => p.theme.colors.secondTextColor};
   color: ${(p) => p.theme.colors.secondTextColor};
-  border-radius: 24px;
+  border-radius: ${(p) => p.theme.radii.quarter};
   transition-duration: 167ms;
   font-size: 16px;
-  font-weight: 600;
+  ${(p) => p.theme.fontWeight.regular};
   line-height: 40px;
   padding: 10px 24px;
   text-align: center;
@@ -94,10 +93,10 @@ export const SocialLogin = styled.a`
   text-decoration: none;
   box-shadow: inset 0 0 0 1px ${(p) => p.theme.colors.secondTextColor};
   color: ${(p) => p.theme.colors.fourthTextColor};
-  border-radius: 24px;
+  border-radius: ${(p) => p.theme.radii.quarter};
   transition-duration: 167ms;
   font-size: 16px;
-  font-weight: 600;
+  ${(p) => p.theme.fontWeight.regular};
   line-height: 40px;
   padding: 10px 24px;
   text-align: center;
@@ -140,7 +139,7 @@ export const Hero = styled.div`
     width: 55%;
     font-size: 56px;
     color: ${(p) => p.theme.colors.thirdTextColor};
-    font-weight: 200;
+    ${(p) => p.theme.fontWeight.thin};
     line-height: 70px;
     @media (max-width: ${(p) => p.theme.breakpoints.tablet}) {
       text-align: center;
@@ -177,14 +176,13 @@ export const SocialBtn = styled.button`
   display: flex;
   justify-content: center;
   margin-bottom: 15px;
-  background-color: #fff;
+  background-color: ${(p) => p.theme.colors.thirdBgColor};
   align-items: center;
   height: 56px;
   width: 100%;
-  border-radius: 28px;
+  border-radius: ${(p) => p.theme.radii.quarter};
   border: 1px solid black;
-  box-shadow: inset 0 0 0 1px rgb(0 0 0 / 60%),
-    inset 0 0 0 2px rgb(0 0 0 / 0%) inset 0 0 0 1px rgb(0 0 0 / 0);
+  box-shadow: inset 0 0 0 1px rgb(0 0 0 / 60%), inset 0 0 0 2px rgb(0 0 0 / 0%) inset 0 0 0 1px rgb(0 0 0 / 0);
   vertical-align: 0;
   z-index: 0;
   transition-duration: 167ms;

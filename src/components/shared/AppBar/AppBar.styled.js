@@ -1,16 +1,16 @@
 import styled from "styled-components";
 import { NavLink } from "react-router-dom";
 
-import logo from "../../../../src/img/home/home-logo.svg";
-import search from "../../../../src/img/home/search-icon.svg";
-import navHome from "../../../../src/img/home/nav-home.svg";
-import navNetwork from "../../../../src/img/home/nav-network.svg";
-import navJobs from "../../../../src/img/home/nav-jobs.svg";
-import navMessaging from "../../../../src/img/home/nav-messaging.svg";
-import navNotification from "../../../../src/img/home/nav-notifications.svg";
-import navWork from "../../../../src/img/home/nav-work.svg";
-import user from "../../../../src/img/home/user.svg";
-import dpopDownMenu from "../../../../src/img/home/down-icon.svg";
+import logo from "../../../img/shared_layout/app_bar/home-logo.svg";
+import search from "../../../img/shared_layout/app_bar/search-icon.svg";
+import navHome from "../../../img/shared_layout/app_bar/nav-home.svg";
+import navNetwork from "../../../img/shared_layout/app_bar/nav-network.svg";
+import navJobs from "../../../img/shared_layout/app_bar/nav-jobs.svg";
+import navMessaging from "../../../img/shared_layout/app_bar/nav-messaging.svg";
+import navNotification from "../../../img/shared_layout/app_bar/nav-notifications.svg";
+import navWork from "../../../img/shared_layout/app_bar/nav-work.svg";
+import user from "../../../img/shared_layout/app_bar/user.svg";
+import dpopDownMenu from "../../../img/shared_layout/app_bar/down-icon.svg";
 
 export { logo, search, navHome, navNetwork, navJobs, navMessaging, navNotification, navWork, user, dpopDownMenu };
 
@@ -54,8 +54,8 @@ export const Search = styled.div`
       border: none;
       box-shadow: none;
       background-color: ${(p) => p.theme.colors.secondBgColor};
-      border-radius: 2px;
-      color: ${(p) => p.theme.colors.borderColor};
+      border-radius: ${(p) => p.theme.radii.small};
+      color: ${(p) => p.theme.colors.bordeFontrColor};
       width: 218px;
       padding: 0 8px 0 40px;
       font-weight: 400;
@@ -106,7 +106,7 @@ export const NavListWrap = styled.ul`
       position: absolute;
       transition: transform 0.2s ease-in-out;
       width: 100%;
-      border-color: ${(p) => p.theme.colors.borderColor};
+      border-color: ${(p) => p.theme.colors.bordeFontrColor};
     }
   }
 `;
@@ -146,7 +146,7 @@ export const NavListItem = styled.li`
   &:active {
     a {
       span {
-        color: ${(p) => p.theme.colors.borderColor};
+        color: ${(p) => p.theme.colors.bordeFontrColor};
       }
     }
   }
@@ -166,26 +166,29 @@ export const SignOut = styled.div`
 `;
 
 export const User = styled(NavListItem)`
-  a > svg {
+  cursor: pointer;
+  div > svg {
     width: 24px;
-    border-radius: 50%;
+    border-radius: ${(p) => p.theme.radii.round};
   }
-  a > img {
+  div > img {
     width: 24px;
     height: 24px;
-    border-radius: 50%;
+    border-radius: ${(p) => p.theme.radii.round};
   }
   span {
     display: flex;
     align-items: center;
   }
-  &:hover {
+  ${(p) =>
+    p.profileDropDownMenu &&
+    `
     ${SignOut} {
       display: flex;
       align-items: center;
       justify-content: center;
     }
-  }
+    `}
 `;
 export const Work = styled(User)`
   border-left: 1px solid rgba(0, 0, 0, 0.08);

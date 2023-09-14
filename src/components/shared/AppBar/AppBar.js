@@ -1,3 +1,6 @@
+import { NavLink } from "react-router-dom";
+import { useState } from "react";
+
 import {
   logo,
   search,
@@ -24,6 +27,7 @@ import {
 } from "./AppBar.styled";
 
 const AppBar = (props) => {
+  const [profileDropDownMenu, setProfiledropDownMenu] = useState(false);
   return (
     <Container>
       <Content>
@@ -43,37 +47,40 @@ const AppBar = (props) => {
         <Nav>
           <NavListWrap>
             <NavListItem className="active">
-              <a href="/LinkedInClone/home" target="_blank" rel="noopener noreferrer">
+              <NavLink to="/home">
                 <img src={navHome} alt="navigation-home icon" />
                 <span>Home</span>
-              </a>
+              </NavLink>
             </NavListItem>
             <NavListItem>
-              <a href="/LinkedInClone/home" target="_blank" rel="noopener noreferrer">
+              <NavLink to="/my-network">
                 <img src={navNetwork} alt="navigation-network icon" />
                 <span>My Network</span>
-              </a>
+              </NavLink>
             </NavListItem>
             <NavListItem>
-              <a href="/LinkedInClone/home" target="_blank" rel="noopener noreferrer">
+              <NavLink to="/jobs">
                 <img src={navJobs} alt="navigation-jobs icon" />
                 <span>Jobs</span>
-              </a>
+              </NavLink>
             </NavListItem>
             <NavListItem>
-              <a href="/LinkedInClone/home" target="_blank" rel="noopener noreferrer">
+              <NavLink to="/messaging">
                 <img src={navMessaging} alt="navigation-messaging icon" />
                 <span>Messaging</span>
-              </a>
+              </NavLink>
             </NavListItem>
             <NavListItem>
-              <a href="/LinkedInClone/home" target="_blank" rel="noopener noreferrer">
+              <NavLink to="/notification">
                 <img src={navNotification} alt="navigation-notification icon" />
                 <span>Notification</span>
-              </a>
+              </NavLink>
             </NavListItem>
-            <User>
-              <a href="/LinkedInClone/home" target="_blank" rel="noopener noreferrer">
+            <User
+              profileDropDownMenu={profileDropDownMenu}
+              onClick={() => setProfiledropDownMenu(!profileDropDownMenu)}
+            >
+              <div>
                 {props.user && props.user.photoURL ? (
                   <img src={props.user.photoURL} alt="user icon" />
                 ) : (
@@ -83,13 +90,14 @@ const AppBar = (props) => {
                   Me
                   <img src={dpopDownMenu} alt="dpop-down menu icon" />
                 </span>
-              </a>
-              <SignOut onClick={() => props.signOut()}>
-                <a href="/LinkedInClone">Sign Out</a>
+              </div>
+              <SignOut>
+                <a href="/prolink">Sign Out</a>
+                <a href="/prolink">Sign Out</a>
               </SignOut>
             </User>
             <Work>
-              <a href="/LinkedInClone/home" target="_blank" rel="noopener noreferrer">
+              <a href="/LinkedInClone/home">
                 <img src={navWork} alt="navigation-work icon" />
                 <span>
                   Work

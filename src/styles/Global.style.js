@@ -62,4 +62,62 @@ body {
   max-width: 100%;
   height: auto;
 }
+
+
+button {
+  cursor: pointer;
+}
+a {
+  cursor: pointer;
+}
+
+div,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+header,
+html,
+i,
+img,
+label,
+li,
+nav,
+p,
+small,
+span,
+ul {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: none;
+  font-size: 100%;
+  vertical-align: baseline;
+  background: transparent;
+}
+
+body {
+  font-family: Arial, sans-serif;
+}
+
+@-webkit-keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
 `;

@@ -31,9 +31,8 @@ export const Nav = styled.nav`
   } */
 `;
 export const Link = styled(NavLink)`
-  width: 135px;
   height: 34px;
-  width: 135px;
+  /* width: 135px; */
   height: 34px;
 
   @media (max-width: ${(p) => p.theme.breakpoints.tablet}) {

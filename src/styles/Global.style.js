@@ -12,7 +12,9 @@ export const GlobalStyle = createGlobalStyle`
 }
 
 
-
+.no-scroll {
+   overflow: hidden;
+}
 
 h1,
 h2,

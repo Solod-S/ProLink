@@ -1,3 +1,7 @@
+import { useEffect, useState } from "react";
+
+import ModalWindow from "../../shared/ModalWindow/ModalWindow";
+import { LoginForm, RegisterForm, RestoreForm } from "../../index";
 import {
   logo,
   hero,
@@ -17,6 +21,27 @@ import {
 } from "./Login.styled";
 
 const LoginComponent = () => {
+  const [isOpen, setIsOpen] = useState(false);
+  const [form, setForm] = useState(<div></div>);
+
+  const handleForm = (form) => {
+    setForm(form);
+    setIsOpen(true);
+  };
+
+  useEffect(() => {
+    isOpen !== false
+      ? document.querySelector("body").classList.add("no-scroll")
+      : document.querySelector("body").classList.remove("no-scroll");
+  }, [isOpen]);
+  // const openModal = () => {
+  //   setIsOpen(true);
+  // };
+  const closeModal = () => {
+    setIsOpen(false);
+    setForm(<div></div>);
+  };
+
   return (
     <Container>
       <Nav>
@@ -24,12 +49,13 @@ const LoginComponent = () => {
           <img src={logo} alt="logo" width="100" />
         </Link>
         <div>
-          <Joint>Joint now</Joint>
-          <SignIn>Sign in</SignIn>
+          <Joint onClick={() => handleForm(<RegisterForm onClose={closeModal} />)}>Joint now</Joint>
+          <SignIn onClick={() => handleForm(<LoginForm onClose={closeModal} setForm={setForm} />)}>Sign in</SignIn>
           <SocialLogin href="#social_login">Social login</SocialLogin>
         </div>
       </Nav>
       <Section>
+        <ModalWindow isOpen={isOpen} onClose={closeModal} component={form} />
         <Hero>
           <h1>Welcome to your professional network.</h1>
           <img src={hero} alt="hero" />

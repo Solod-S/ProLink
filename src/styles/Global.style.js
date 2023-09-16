@@ -7,8 +7,8 @@ export const GlobalStyle = createGlobalStyle`
 
 :root {
 
-  --toastify-color-success: #2196f3;
-  --toastify-color-error: #2F303A;
+  --toastify-color-success: ${(p) => p.theme.colors.secondTextColor};;
+  --toastify-color-error: red;
 }
 
 
@@ -35,6 +35,7 @@ ul {
 
 a {
   text-decoration: none;
+    cursor: pointer;
 }
 
 ul {
@@ -69,9 +70,7 @@ body {
 button {
   cursor: pointer;
 }
-a {
-  cursor: pointer;
-}
+
 
 div,
 h1,

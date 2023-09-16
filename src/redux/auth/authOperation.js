@@ -5,14 +5,34 @@ import { toast } from "react-toastify";
 export const register = createAsyncThunk("auth/register", async (credentials, thunkAPI) => {
   try {
     const data = await api.postUser(credentials);
+    console.log(data);
+    toast.success(`Registration was successful, check your email`);
     return data;
   } catch (error) {
     if (error.response.status === 400) {
       toast.error(`${error.response?.data?.message}!`);
     }
     if (error.response.status === 409) {
-      toast.error(`This email already in use `);
+      console.log(`!!!!!!!!!`);
+      toast.error(`This email already in use`);
     }
+    return thunkAPI.rejectWithValue(error.message);
+  }
+});
+
+export const passwordRestore = createAsyncThunk("auth/password-reset", async (email, thunkAPI) => {
+  try {
+    const data = await api.restoreUser(email);
+    toast.success(`Reset was successful, check your email`);
+    return data;
+  } catch (error) {
+    if (error.response.status === 404) {
+      toast.error(`${error.response?.data?.message ?? "Email wrong or invalid!"}!`);
+    }
+    if (error.response.status === 401) {
+      toast.error(`${error.response?.data?.message ?? "User not verify"}!`);
+    }
+
     return thunkAPI.rejectWithValue(error.message);
   }
 });
@@ -20,6 +40,7 @@ export const register = createAsyncThunk("auth/register", async (credentials, th
 export const logIn = createAsyncThunk("auth/signin", async (credentials, thunkAPI) => {
   try {
     const data = await api.logIn(credentials);
+
     return data;
   } catch (error) {
     if (error.response.status === 401) {

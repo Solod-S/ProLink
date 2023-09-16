@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-
+import { ToastContainer } from "react-toastify";
 import ModalWindow from "../../shared/ModalWindow/ModalWindow";
-import { LoginForm, RegisterForm, RestoreForm } from "../../index";
+import { RegisterForm, AuthWindow } from "../../index";
 import {
   logo,
   hero,
@@ -44,13 +44,25 @@ const LoginComponent = () => {
 
   return (
     <Container>
+      <ToastContainer
+        position="bottom-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
       <Nav>
         <Link path="/">
           <img src={logo} alt="logo" width="100" />
         </Link>
         <div>
           <Joint onClick={() => handleForm(<RegisterForm onClose={closeModal} />)}>Joint now</Joint>
-          <SignIn onClick={() => handleForm(<LoginForm onClose={closeModal} setForm={setForm} />)}>Sign in</SignIn>
+          <SignIn onClick={() => handleForm(<AuthWindow onClose={closeModal} />)}>Sign in</SignIn>
           <SocialLogin href="#social_login">Social login</SocialLogin>
         </div>
       </Nav>

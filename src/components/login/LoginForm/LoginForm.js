@@ -1,4 +1,7 @@
 import { Formik } from "formik";
+import { useDispatch } from "react-redux";
+import { logIn } from "../../../redux/auth/authOperation";
+
 import {
   PasswordIcon,
   MailIcon,
@@ -24,9 +27,11 @@ const initialValues = {
   password: "",
 };
 
-function LoginForm({ onClose }) {
+function LoginForm({ onClose, setOption }) {
+  const dispatch = useDispatch();
+
   const handleSubmit = async (values, actions) => {
-    console.log(values);
+    dispatch(logIn(values));
     actions.setSubmitting(false);
     actions.resetForm();
     onClose();
@@ -68,7 +73,7 @@ function LoginForm({ onClose }) {
             </FormField>
             <RestoreField>
               <span>
-                <RestoreNavigate>Forgot password?</RestoreNavigate>
+                <RestoreNavigate onClick={() => setOption("restore")}>Forgot password?</RestoreNavigate>
               </span>
             </RestoreField>
             <Button type="submit" disabled={isSubmitting}>

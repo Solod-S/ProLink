@@ -148,7 +148,7 @@ export const InputLabel = styled.label`
   font-weight: ${(p) => p.theme.fontWeight.regular};
   line-height: calc(14 / 12);
   letter-spacing: 0.01em;
-  color: ${(p) => p.theme.colors.boldTextColor};
+  color: rgba(0, 0, 0, 0.6);
 `;
 
 export const Wrapper = styled.div`
@@ -195,9 +195,9 @@ export const RestoreNavigate = styled.p`
   font-weight: ${(p) => p.theme.fontWeight.bolt};
 `;
 
-export const Button = styled.a`
+export const Button = styled.button`
   width: 135px;
-  height: 34px;
+  height: 44px;
   margin-left: 5px;
   text-decoration: none;
   box-shadow: inset 0 0 0 1px ${(p) => p.theme.colors.secondTextColor};
@@ -205,9 +205,9 @@ export const Button = styled.a`
   border-radius: ${(p) => p.theme.radii.quarter};
   transition-duration: 167ms;
   font-size: 16px;
-  font-weight: ${(p) => p.theme.fontWeight.regular};
+  ${(p) => p.theme.fontWeight.regular};
   line-height: 40px;
-  padding: 10px 24px;
+  /* padding: 10px 24px; */
   text-align: center;
   cursor: pointer;
   background-color: ${(p) => p.theme.colors.secondTextColor};

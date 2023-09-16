@@ -1,5 +1,7 @@
 import { NavLink } from "react-router-dom";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { logOut } from "../../../redux/auth/authOperation";
 
 import {
   logo,
@@ -27,6 +29,7 @@ import {
 } from "./AppBar.styled";
 
 const AppBar = (props) => {
+  const dispatch = useDispatch();
   const [profileDropDownMenu, setProfiledropDownMenu] = useState(false);
   return (
     <Container>
@@ -91,9 +94,8 @@ const AppBar = (props) => {
                   <img src={dpopDownMenu} alt="dpop-down menu icon" />
                 </span>
               </div>
-              <SignOut>
-                <a href="/prolink">Sign Out</a>
-                <a href="/prolink">Sign Out</a>
+              <SignOut onClick={() => dispatch(logOut())}>
+                <button>Sign Out</button>
               </SignOut>
             </User>
             <Work>

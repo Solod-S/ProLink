@@ -6,5 +6,6 @@ import ModalWindow from "./shared/ModalWindow/ModalWindow";
 import RegisterForm from "./login/RegisterForm/RegisterForm";
 import LoginForm from "./login/LoginForm/LoginForm";
 import RestoreForm from "./login/RestoreForm/RestoreForm";
+import AuthWindow from "./login/AuthWindow/AuthWindow";
 
-export { Login, AppBar, Home, SharedLayout, ModalWindow, RegisterForm, LoginForm, RestoreForm };
+export { Login, AppBar, Home, SharedLayout, ModalWindow, RegisterForm, LoginForm, RestoreForm, AuthWindow };

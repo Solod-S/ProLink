@@ -1,4 +1,8 @@
 import { Formik } from "formik";
+
+import { useDispatch } from "react-redux";
+import { register } from "../../../redux/auth/authOperation";
+
 import {
   NameIcon,
   SurnameIcon,
@@ -33,8 +37,11 @@ const initialValues = {
 };
 
 function RegisterForm({ onClose }) {
+  const dispatch = useDispatch();
+
   const handleSubmit = async (values, actions) => {
-    console.log(values);
+    const { name, surname, password, mail } = values;
+    dispatch(register({ name, surname, email: mail, password }));
     actions.setSubmitting(false);
     actions.resetForm();
     onClose();

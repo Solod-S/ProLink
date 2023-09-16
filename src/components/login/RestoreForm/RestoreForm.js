@@ -1,4 +1,7 @@
 import { Formik } from "formik";
+import { useDispatch } from "react-redux";
+import { passwordRestore } from "../../../redux/auth/authOperation";
+
 import {
   MailIcon,
   CloseBtn,
@@ -16,23 +19,26 @@ import {
   RestoreNavigate,
 } from "./RestoreForm.styled.js";
 
-import { loginSchema } from "../../../schema/index.js";
+import { passwordRestoreSchema } from "../../../schema/index.js";
 
 const initialValues = {
   mail: "",
-  password: "",
 };
 
-function RestoreForm({ onClose }) {
+function RestoreForm({ onClose, setOption }) {
+  const dispatch = useDispatch();
+
   const handleSubmit = async (values, actions) => {
-    console.log(values);
+    console.log(`x`);
+    const { mail } = values;
+    dispatch(passwordRestore(mail));
     actions.setSubmitting(false);
     actions.resetForm();
     onClose();
   };
 
   return (
-    <Formik validationSchema={loginSchema} initialValues={initialValues} onSubmit={handleSubmit}>
+    <Formik validationSchema={passwordRestoreSchema} initialValues={initialValues} onSubmit={handleSubmit}>
       {({ isSubmitting }) => (
         <>
           <CloseBtn aria-label="close window" onClick={onClose}>
@@ -57,11 +63,11 @@ function RestoreForm({ onClose }) {
             </FormField>
             <RestoreField>
               <span>
-                <RestoreNavigate>back</RestoreNavigate>
+                <RestoreNavigate onClick={() => setOption("login")}>back</RestoreNavigate>
               </span>
             </RestoreField>
             <Button type="submit" disabled={isSubmitting}>
-              Sign in
+              Restore
             </Button>
           </ForM>
         </>

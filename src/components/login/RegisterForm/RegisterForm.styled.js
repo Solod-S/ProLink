@@ -151,7 +151,7 @@ export const InputLabel = styled.label`
   font-weight: ${(p) => p.theme.fontWeight.regular};
   line-height: calc(14 / 12);
   letter-spacing: 0.01em;
-  color: ${(p) => p.theme.colors.boldTextColor};
+  color: rgba(0, 0, 0, 0.6);
 `;
 
 export const Wrapper = styled.div`
@@ -237,9 +237,9 @@ export const ChekboxLink = styled.a`
   font-weight: ${(p) => p.theme.fontWeight.normal};
 `;
 
-export const Button = styled.a`
+export const Button = styled.button`
   width: 135px;
-  height: 34px;
+  height: 44px;
   margin-left: 5px;
   text-decoration: none;
   box-shadow: inset 0 0 0 1px ${(p) => p.theme.colors.secondTextColor};
@@ -249,7 +249,7 @@ export const Button = styled.a`
   font-size: 16px;
   ${(p) => p.theme.fontWeight.regular};
   line-height: 40px;
-  padding: 10px 24px;
+  /* padding: 10px 24px; */
   text-align: center;
   cursor: pointer;
   background-color: ${(p) => p.theme.colors.secondTextColor};

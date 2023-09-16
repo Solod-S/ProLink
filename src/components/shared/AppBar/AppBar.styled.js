@@ -163,6 +163,9 @@ export const SignOut = styled.div`
   transition-duration: 167ms;
   text-align: center;
   display: none;
+  button {
+    font-size: ${(p) => p.theme.fontSizes.xxs};
+  }
 `;
 
 export const User = styled(NavListItem)`

@@ -29,7 +29,6 @@ function RestoreForm({ onClose, setOption }) {
   const dispatch = useDispatch();
 
   const handleSubmit = async (values, actions) => {
-    console.log(`x`);
     const { mail } = values;
     dispatch(passwordRestore(mail));
     actions.setSubmitting(false);

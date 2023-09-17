@@ -171,7 +171,7 @@ export const Form = styled.div`
     margin-top: 20px;
   }
 `;
-export const SocialBtn = styled.button`
+export const SocialBtn = styled.a`
   display: flex;
   justify-content: center;
   margin-bottom: 15px;

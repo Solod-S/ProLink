@@ -1,16 +1,19 @@
-import { Route, Routes } from "react-router-dom";
-import { SharedLayout } from ".";
-
-import { LoginPage, HomePage } from "../pages";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import UserRoutes from "./UserRoutes";
+import { fetchCurrentUser } from "../redux/auth/authOperation";
 
 function App() {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchCurrentUser());
+  }, [dispatch]);
+
   return (
-    <Routes>
-      <Route path="/login" element={<LoginPage />} />
-      <Route path="/" element={<SharedLayout />}>
-        <Route index path="/home" element={<HomePage />} />
-      </Route>
-    </Routes>
+    <>
+      <UserRoutes />
+    </>
   );
 }
 export default App;

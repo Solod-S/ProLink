@@ -74,7 +74,7 @@ const LoginComponent = () => {
         </Hero>
       </Section>
       <Form id="social_login">
-        <SocialBtn>
+        <SocialBtn href="https://localhost:3000/auth/google">
           <img src={google} alt="google" /> Sign in with Google
         </SocialBtn>
         <SocialBtn>

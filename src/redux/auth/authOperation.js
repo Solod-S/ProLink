@@ -5,7 +5,7 @@ import { toast } from "react-toastify";
 export const register = createAsyncThunk("auth/register", async (credentials, thunkAPI) => {
   try {
     const data = await api.postUser(credentials);
-    console.log(data);
+
     toast.success(`Registration was successful, check your email`);
     return data;
   } catch (error) {
@@ -13,7 +13,6 @@ export const register = createAsyncThunk("auth/register", async (credentials, th
       toast.error(`${error.response?.data?.message}!`);
     }
     if (error.response.status === 409) {
-      console.log(`!!!!!!!!!`);
       toast.error(`This email already in use`);
     }
     return thunkAPI.rejectWithValue(error.message);
@@ -67,13 +66,12 @@ export const logOut = createAsyncThunk("auth/logOut", async (_, thunkAPI) => {
 });
 
 export const fetchCurrentUser = createAsyncThunk("auth/refresh", async (_, thunkAPI) => {
-  const state = thunkAPI.getState();
-  const persisterToken = state.auth.token;
-  if (persisterToken === null) {
+  const accessToken = localStorage.getItem("accessToken");
+  if (accessToken === null || !accessToken) {
     return thunkAPI.rejectWithValue();
   }
   try {
-    const data = await api.fetchCurrentUser(persisterToken);
+    const data = await api.fetchCurrentUser(accessToken);
     return data;
   } catch (error) {
     return thunkAPI.rejectWithValue(error.message);

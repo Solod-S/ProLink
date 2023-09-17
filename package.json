@@ -2,7 +2,7 @@
   "name": "prolink",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://Solod-S.github.io/prolink/login",
+  "homepage": "https://Solod-S.github.io/prolink/",
   "dependencies": {
     "@csstools/normalize.css": "^12.0.0",
     "@reduxjs/toolkit": "^1.9.5",

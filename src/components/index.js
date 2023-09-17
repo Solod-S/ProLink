@@ -7,5 +7,19 @@ import RegisterForm from "./login/RegisterForm/RegisterForm";
 import LoginForm from "./login/LoginForm/LoginForm";
 import RestoreForm from "./login/RestoreForm/RestoreForm";
 import AuthWindow from "./login/AuthWindow/AuthWindow";
+import PrivateRoute from "./shared/PrivateRoute/PrivateRoute";
+import PublicRoute from "./shared/PublicRoute/PublicRoute";
 
-export { Login, AppBar, Home, SharedLayout, ModalWindow, RegisterForm, LoginForm, RestoreForm, AuthWindow };
+export {
+  Login,
+  AppBar,
+  Home,
+  SharedLayout,
+  ModalWindow,
+  RegisterForm,
+  LoginForm,
+  RestoreForm,
+  AuthWindow,
+  PrivateRoute,
+  PublicRoute,
+};

@@ -1,5 +1,5 @@
 import LoginPage from "./LoginPage/LoginPage";
 import HomePage from "./HomePage/HomePage";
-import RedirectGooglePage from "./RedirectGooglePage/RedirectGooglePage";
+import RedirectSocialPage from "./RedirectSocialPage/RedirectSocialPage";
 
-export { LoginPage, HomePage, RedirectGooglePage };
+export { LoginPage, HomePage, RedirectSocialPage };

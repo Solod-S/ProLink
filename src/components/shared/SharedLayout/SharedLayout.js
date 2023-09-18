@@ -3,15 +3,13 @@ import { Suspense } from "react";
 
 import AppBar from "../AppBar/AppBar";
 import { Box } from "../Box/Box";
-// import Loader
+import { Loader } from "../../index";
 
 export default function SharedLayout() {
   return (
     <>
       <AppBar />
-      <Suspense
-      // fallback={<Loader />}
-      >
+      <Suspense fallback={<Loader />}>
         <Box
         // minHeight="60vh"
         >

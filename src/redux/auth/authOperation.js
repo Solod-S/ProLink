@@ -57,6 +57,27 @@ export const logIn = createAsyncThunk("auth/signin", async (credentials, thunkAP
   }
 });
 
+export const googleLogIn = createAsyncThunk("auth/google-signin", async (credentials, thunkAPI) => {
+  try {
+    const data = await api.googleLogIn(credentials);
+
+    return data;
+  } catch (error) {
+    if (error.response.status === 401) {
+      toast.error(`${error.response?.data?.message ?? "Email is not verified"}!`);
+    }
+
+    if (error.response.status === 404) {
+      toast.error(`${error.response?.data?.message ?? "Email or password wrong or invalid!"}!`);
+    }
+
+    if (error.response.status === 400) {
+      toast.error(`${error.response?.data?.message ?? "Failed to login, try again...."}!`);
+    }
+    return thunkAPI.rejectWithValue(error.message);
+  }
+});
+
 export const logOut = createAsyncThunk("auth/logOut", async (_, thunkAPI) => {
   try {
     await api.logOut();

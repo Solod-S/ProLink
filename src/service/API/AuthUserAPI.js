@@ -1,20 +1,20 @@
-import { axiosInstance, instanceToken } from "../axios/axios";
+import { socialNetworkAxiosInstance, socialNetworkToken } from "../axios/axios";
 
 export async function postUser(credentials) {
-  const { data } = await axiosInstance.post(`/auth/register`, credentials);
-  instanceToken.set(data.token);
+  const { data } = await socialNetworkAxiosInstance.post(`/auth/register`, credentials);
+  socialNetworkToken.set(data.token);
   return data;
 }
 
 export async function restoreUser(email) {
-  const { data } = await axiosInstance.post(`/auth/password-reset`, { email: email });
+  const { data } = await socialNetworkAxiosInstance.post(`/auth/password-reset`, { email: email });
   return data;
 }
 
 export async function logIn(credentials) {
   const { mail, password } = credentials;
-  const { data } = await axiosInstance.post(`/auth/login`, { email: mail, password });
-  instanceToken.set(data.accessToken);
+  const { data } = await socialNetworkAxiosInstance.post(`/auth/login`, { email: mail, password });
+  socialNetworkToken.set(data.accessToken);
   localStorage.setItem("accessToken", data.data.accessToken);
   localStorage.setItem("refreshToken", data.data.refreshToken);
   localStorage.setItem("sessionId", data.data.sessionId);
@@ -22,16 +22,27 @@ export async function logIn(credentials) {
   return data;
 }
 
+export async function googleLogIn(credentials) {
+  const { accesstoken, refreshtoken, sessionid } = credentials;
+  socialNetworkToken.set(accesstoken);
+  localStorage.setItem("accessToken", accesstoken);
+  localStorage.setItem("refreshToken", refreshtoken);
+  localStorage.setItem("sessionId", sessionid);
+
+  const { data } = await socialNetworkAxiosInstance.get(`/auth/current`);
+  return data;
+}
+
 export async function logOut() {
-  await axiosInstance.get(`/auth/logout`);
+  await socialNetworkAxiosInstance.get(`/auth/logout`);
   localStorage.removeItem("refreshToken");
   localStorage.removeItem("sessionId");
   localStorage.removeItem("accessToken");
-  instanceToken.unset();
+  socialNetworkToken.unset();
 }
 
 export async function fetchCurrentUser(accessToken) {
-  instanceToken.set(accessToken);
-  const { data } = await axiosInstance.get(`/auth/current`);
+  socialNetworkToken.set(accessToken);
+  const { data } = await socialNetworkAxiosInstance.get(`/auth/current`);
   return data;
 }

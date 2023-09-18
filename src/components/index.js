@@ -9,6 +9,7 @@ import RestoreForm from "./login/RestoreForm/RestoreForm";
 import AuthWindow from "./login/AuthWindow/AuthWindow";
 import PrivateRoute from "./shared/PrivateRoute/PrivateRoute";
 import PublicRoute from "./shared/PublicRoute/PublicRoute";
+import Loader from "./shared/Loader/Loader";
 
 export {
   Login,
@@ -22,4 +23,5 @@ export {
   AuthWindow,
   PrivateRoute,
   PublicRoute,
+  Loader,
 };

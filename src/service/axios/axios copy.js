@@ -1,15 +1,8 @@
 import axios from "axios";
-
-const { REACT_APP_BAKEND_BASE_URL } = process.env;
-
-let navigate;
-
-export const setNavigate = (nav) => {
-  navigate = nav;
-};
+import { useNavigate } from "react-router-dom";
 
 export const socialNetworkAxiosInstance = axios.create({
-  baseURL: REACT_APP_BAKEND_BASE_URL,
+  baseURL: "https://linkedinclone-backend.onrender.com",
 });
 
 export const socialNetworkToken = {
@@ -39,18 +32,6 @@ socialNetworkAxiosInstance.interceptors.response.use(
         return socialNetworkAxiosInstance(error.config);
         //   делаем повторный запрос (ерор конфиг это настройки этого не удавшегося запроса, урл, боди и т д)
       } catch (error) {
-        console.log(`ss`);
-        if (navigate) {
-          const authPersistState = JSON.parse(localStorage.getItem("persist:auth"));
-          authPersistState.isRefreshing = false;
-          authPersistState.isLoggedIn = false;
-          authPersistState.user = {};
-          localStorage.setItem("persist:auth", JSON.stringify(authPersistState));
-          localStorage.removeItem("refreshToken");
-          localStorage.removeItem("sessionId");
-          localStorage.removeItem("accessToken");
-          navigate("/login");
-        }
         return Promise.reject(error);
 
         //   ловим 403 ошибку (рефреш токен просрочен)

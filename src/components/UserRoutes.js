@@ -1,19 +1,24 @@
 import { lazy, Suspense } from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
+import { setNavigate } from "../service/axios/axios";
+import { useNavigate } from "react-router-dom";
 
-import { PrivateRoute, PublicRoute, SharedLayout } from "./index";
+import { PrivateRoute, PublicRoute, SharedLayout, Loader } from "./index";
+
 const LoginPage = lazy(() => import("../pages/LoginPage/LoginPage"));
 const HomePage = lazy(() => import("../pages/HomePage/HomePage"));
-const RedirectGooglePage = lazy(() => import("../pages/RedirectGooglePage/RedirectGooglePage"));
+const RedirectSocialPage = lazy(() => import("../pages/RedirectSocialPage/RedirectSocialPage"));
 
 const UserRoutes = () => {
+  const navigate = useNavigate();
+  setNavigate(navigate);
   return (
-    <Suspense fallback={<p>....Load page</p>}>
+    <Suspense fallback={<Loader />}>
       <Routes>
         <Route element={<PublicRoute />}>
           <Route index path="/login" element={<LoginPage />} />
-          <Route path="/google-redirect" element={<RedirectGooglePage />} />
           <Route path="*" element={<Navigate to="/login" />} />
+          <Route path="/social-redirect" element={<RedirectSocialPage />} />
         </Route>
         <Route element={<PrivateRoute />}>
           <Route path="/" element={<SharedLayout />}>

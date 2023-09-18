@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { ToastContainer } from "react-toastify";
-import ModalWindow from "../../shared/ModalWindow/ModalWindow";
-import { RegisterForm, AuthWindow } from "../../index";
+
+import { RegisterForm, AuthWindow, ModalWindow } from "../../index";
 import {
   logo,
   hero,
@@ -18,7 +18,10 @@ import {
   Hero,
   Form,
   SocialBtn,
+  github,
 } from "./Login.styled";
+
+const { REACT_APP_BAKEND_BASE_URL } = process.env;
 
 const LoginComponent = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -74,14 +77,17 @@ const LoginComponent = () => {
         </Hero>
       </Section>
       <Form id="social_login">
-        <SocialBtn href="https://localhost:3000/auth/google">
+        <SocialBtn href={`${REACT_APP_BAKEND_BASE_URL}/auth/google`}>
           <img src={google} alt="google" /> Sign in with Google
         </SocialBtn>
-        <SocialBtn>
+        <SocialBtn href={`${REACT_APP_BAKEND_BASE_URL}/auth/facebook`}>
           <img src={facebook} alt="google" /> Sign in with FaceBook
         </SocialBtn>
-        <SocialBtn>
+        <SocialBtn href={`${REACT_APP_BAKEND_BASE_URL}/auth/linkedin`}>
           <img src={linkedIn} alt="linkedIn" /> Sign in with LinkedIn
+        </SocialBtn>
+        <SocialBtn href={`${REACT_APP_BAKEND_BASE_URL}/auth/github`}>
+          <img src={github} alt="linkedIn" /> Sign in with Github
         </SocialBtn>
       </Form>
     </Container>

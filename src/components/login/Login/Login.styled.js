@@ -1,13 +1,13 @@
 import styled from "styled-components";
 import { NavLink } from "react-router-dom";
 
-import logo from "../../../../src/img/login-logo.png";
-import hero from "../../../../src/img/login-hero.svg";
-import google from "../../../../src/img/google.svg";
-import linkedIn from "../../../../src/img/linkedIn.svg";
-import facebook from "../../../../src/img/facebook.svg";
-
-export { logo, hero, google, linkedIn, facebook };
+import logo from "../../../../src/img/login/login/login-logo.png";
+import hero from "../../../../src/img/login/login/login-hero.svg";
+import google from "../../../../src/img/login/login/google.svg";
+import linkedIn from "../../../../src/img/login/login/linkedIn.svg";
+import facebook from "../../../../src/img/login/login/facebook.svg";
+import github from "../../../../src/img/login/login/github.svg";
+export { logo, hero, google, linkedIn, facebook, github };
 
 export const Container = styled.div`
   padding: 0;

@@ -39,7 +39,6 @@ socialNetworkAxiosInstance.interceptors.response.use(
         return socialNetworkAxiosInstance(error.config);
         //   делаем повторный запрос (ерор конфиг это настройки этого не удавшегося запроса, урл, боди и т д)
       } catch (error) {
-        console.log(`ss`);
         if (navigate) {
           const authPersistState = JSON.parse(localStorage.getItem("persist:auth"));
           authPersistState.isRefreshing = false;

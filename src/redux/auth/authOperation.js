@@ -36,6 +36,23 @@ export const passwordRestore = createAsyncThunk("auth/password-reset", async (em
   }
 });
 
+export const createNewPassword = createAsyncThunk("auth/new-password", async (credentials, thunkAPI) => {
+  try {
+    const data = await api.createNewPassword(credentials);
+    toast.success(`The password was successfully changed`);
+    return data;
+  } catch (error) {
+    if (error.response.status === 404) {
+      console.log(`ss`);
+      toast.error(`"Operation time has expired"`);
+    }
+    localStorage.removeItem("refreshToken");
+    localStorage.removeItem("sessionId");
+    localStorage.removeItem("accessToken");
+    return thunkAPI.rejectWithValue(error.message);
+  }
+});
+
 export const logIn = createAsyncThunk("auth/signin", async (credentials, thunkAPI) => {
   try {
     const data = await api.logIn(credentials);
@@ -53,6 +70,11 @@ export const logIn = createAsyncThunk("auth/signin", async (credentials, thunkAP
     if (error.response.status === 400) {
       toast.error(`${error.response?.data?.message ?? "Failed to login, try again...."}!`);
     }
+
+    localStorage.removeItem("refreshToken");
+    localStorage.removeItem("sessionId");
+    localStorage.removeItem("accessToken");
+
     return thunkAPI.rejectWithValue(error.message);
   }
 });
@@ -74,6 +96,11 @@ export const googleLogIn = createAsyncThunk("auth/google-signin", async (credent
     if (error.response.status === 400) {
       toast.error(`${error.response?.data?.message ?? "Failed to login, try again...."}!`);
     }
+
+    localStorage.removeItem("refreshToken");
+    localStorage.removeItem("sessionId");
+    localStorage.removeItem("accessToken");
+
     return thunkAPI.rejectWithValue(error.message);
   }
 });
@@ -82,6 +109,10 @@ export const logOut = createAsyncThunk("auth/logOut", async (_, thunkAPI) => {
   try {
     await api.logOut();
   } catch (error) {
+    localStorage.removeItem("refreshToken");
+    localStorage.removeItem("sessionId");
+    localStorage.removeItem("accessToken");
+
     return thunkAPI.rejectWithValue(error.message);
   }
 });
@@ -95,6 +126,10 @@ export const fetchCurrentUser = createAsyncThunk("auth/refresh", async (_, thunk
     const data = await api.fetchCurrentUser(accessToken);
     return data;
   } catch (error) {
+    localStorage.removeItem("refreshToken");
+    localStorage.removeItem("sessionId");
+    localStorage.removeItem("accessToken");
+
     return thunkAPI.rejectWithValue(error.message);
   }
 });

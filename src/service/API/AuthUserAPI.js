@@ -7,7 +7,18 @@ export async function postUser(credentials) {
 }
 
 export async function restoreUser(email) {
-  const { data } = await socialNetworkAxiosInstance.post(`/auth/password-reset`, { email: email });
+  const { data } = await socialNetworkAxiosInstance.post(`/auth/password-reset`, { email });
+  return data;
+}
+
+export async function createNewPassword({ resetToken, password }) {
+  const { data } = await socialNetworkAxiosInstance.post(`/auth/password-reset/${resetToken}`, { password });
+  socialNetworkToken.set(data.accessToken);
+
+  localStorage.setItem("accessToken", data.data.accessToken);
+  localStorage.setItem("refreshToken", data.data.refreshToken);
+  localStorage.setItem("sessionId", data.data.sessionId);
+
   return data;
 }
 

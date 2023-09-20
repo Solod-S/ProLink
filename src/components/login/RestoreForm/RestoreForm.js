@@ -43,7 +43,7 @@ function RestoreForm({ onClose, setOption }) {
           <CloseBtn aria-label="close window" onClick={onClose}>
             <CloseIcon size={19} color="black" />
           </CloseBtn>
-          <Title>Restore your Pro Link your account</Title>
+          <Title>Restore your Prolink account</Title>
           <ForM>
             <FormField>
               <ErrorWrapper>

@@ -18,6 +18,11 @@ const AuthSlice = createSlice({
       state.user = payload.data.user;
       state.isloggedIn = true;
     },
+    [authOperation.createNewPassword.fulfilled](state, action) {
+      const { payload } = action;
+      state.user = payload.data.user;
+      state.isloggedIn = true;
+    },
     [authOperation.googleLogIn.fulfilled](state, action) {
       const { payload } = action;
       state.user = payload.data.user;
@@ -33,6 +38,10 @@ const AuthSlice = createSlice({
       state.isloggedIn = true;
     },
     [authOperation.googleLogIn.rejected](state, _) {
+      state.user = {};
+      state.isloggedIn = false;
+    },
+    [authOperation.createNewPassword.rejected](state, _) {
       state.user = {};
       state.isloggedIn = false;
     },

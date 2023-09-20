@@ -1,5 +1,6 @@
 import LoginPage from "./LoginPage/LoginPage";
 import HomePage from "./HomePage/HomePage";
 import RedirectSocialPage from "./RedirectSocialPage/RedirectSocialPage";
+import PasswordRestorePage from "./PasswordRestorePage/PasswordRestorePage";
 
-export { LoginPage, HomePage, RedirectSocialPage };
+export { LoginPage, HomePage, RedirectSocialPage, PasswordRestorePage };

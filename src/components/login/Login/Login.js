@@ -46,7 +46,7 @@ const LoginComponent = () => {
   };
 
   return (
-    <Container>
+    <Container data-testid="root">
       <ToastContainer
         position="bottom-right"
         autoClose={5000}

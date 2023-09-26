@@ -55,6 +55,7 @@ function LoginForm({ onClose, setOption }) {
                 <Input
                   // type="email"
                   name="mail"
+                  data-testid="mail"
                   id="mail"
                   placeholder=" "
                 />
@@ -67,7 +68,7 @@ function LoginForm({ onClose, setOption }) {
                 <Error name="password" component="div" />
               </ErrorWrapper>
               <Wrapper>
-                <Input type="password" name="password" id="password" placeholder=" " />
+                <Input type="password" name="password" data-testid="password" id="password" placeholder=" " />
                 <PasswordIcon size={19} aria-label="Password icon" />
               </Wrapper>
             </FormField>
@@ -77,7 +78,7 @@ function LoginForm({ onClose, setOption }) {
               </span>
             </RestoreField>
             <Button type="submit" disabled={isSubmitting}>
-              Sign in
+              Login
             </Button>
           </ForM>
         </>

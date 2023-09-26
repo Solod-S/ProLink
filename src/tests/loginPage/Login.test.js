@@ -105,6 +105,36 @@ describe("LoginPage => Login Component Tests", () => {
       expect(modalPasswordLabel).toBeInTheDocument();
     });
 
+    await waitFor(() => {
+      const modalNameInput = screen.getByTestId("name");
+      expect(modalNameInput).toBeInTheDocument();
+    });
+
+    await waitFor(() => {
+      const modalMailInput = screen.getByTestId("mail");
+      expect(modalMailInput).toBeInTheDocument();
+    });
+
+    await waitFor(() => {
+      const modalPasswordInput = screen.getByTestId("password");
+      expect(modalPasswordInput).toBeInTheDocument();
+    });
+
+    await waitFor(() => {
+      const modalPolicyInput = screen.getByTestId("policy");
+      expect(modalPolicyInput).toBeInTheDocument();
+    });
+
+    await waitFor(() => {
+      const sendButton = screen.getByText("Send");
+      expect(sendButton).toBeInTheDocument();
+    });
+
+    await waitFor(() => {
+      const closeButton = screen.getByLabelText("close window");
+      expect(closeButton).toBeInTheDocument();
+    });
+
     // eslint-disable-next-line testing-library/no-unnecessary-act
     act(() => {
       // Find the "close" button
@@ -115,7 +145,7 @@ describe("LoginPage => Login Component Tests", () => {
 
     // Check that the modal window is no longer visible in the document
     await waitFor(() => {
-      const modalContent = screen.queryByText("Make the most of your professional life"); // Замените на текст, который отображается в модальном окне
+      const modalContent = screen.queryByText("Make the most of your professional life");
       expect(modalContent).toBeNull();
     });
   });
@@ -135,7 +165,7 @@ describe("LoginPage => Login Component Tests", () => {
 
     // eslint-disable-next-line testing-library/no-unnecessary-act
     act(() => {
-      // Find the "Joint now" button
+      // Find the "Sign in" button
       const signInButton = screen.getByText("Sign in");
       // Simulating a click on a button
       userEvent.click(signInButton);
@@ -145,6 +175,36 @@ describe("LoginPage => Login Component Tests", () => {
     await waitFor(() => {
       const modalContent = screen.getByText("Sign in to Pro Link your account");
       expect(modalContent).toBeInTheDocument();
+    });
+
+    await waitFor(() => {
+      const modalMailLabel = screen.getByText("Mail");
+      expect(modalMailLabel).toBeInTheDocument();
+    });
+
+    await waitFor(() => {
+      const modalPasswordLabel = screen.getByText("Password");
+      expect(modalPasswordLabel).toBeInTheDocument();
+    });
+
+    await waitFor(() => {
+      const modalMailInput = screen.getByTestId("mail");
+      expect(modalMailInput).toBeInTheDocument();
+    });
+
+    await waitFor(() => {
+      const modalPasswordInput = screen.getByTestId("password");
+      expect(modalPasswordInput).toBeInTheDocument();
+    });
+
+    await waitFor(() => {
+      const sendButton = screen.getByText("Login");
+      expect(sendButton).toBeInTheDocument();
+    });
+
+    await waitFor(() => {
+      const closeButton = screen.getByLabelText("close window");
+      expect(closeButton).toBeInTheDocument();
     });
 
     // eslint-disable-next-line testing-library/no-unnecessary-act
@@ -157,8 +217,84 @@ describe("LoginPage => Login Component Tests", () => {
 
     // Check that the modal window is no longer visible in the document
     await waitFor(() => {
-      const modalContent = screen.queryByText("Sign in to Pro Link your account"); // Замените на текст, который отображается в модальном окне
+      const modalContent = screen.queryByText("Sign in to Pro Link your account");
       expect(modalContent).toBeNull();
+    });
+  });
+
+  test("Open/Close 'Restore account' modal", async () => {
+    render(
+      <Provider store={store}>
+        <PersistGate loading={null} persistor={persistor}>
+          <ThemeProvider theme={theme}>
+            <BrowserRouter>
+              <Login />
+            </BrowserRouter>
+          </ThemeProvider>
+        </PersistGate>
+      </Provider>
+    );
+
+    // eslint-disable-next-line testing-library/no-unnecessary-act
+    act(() => {
+      // Find the "Sign in" button
+      const signInButton = screen.getByText("Sign in");
+      // Simulating a click on a button
+      userEvent.click(signInButton);
+    });
+
+    // eslint-disable-next-line testing-library/no-unnecessary-act
+    act(() => {
+      // Find the "Forgot password?" button
+      const switchToRestoreMode = screen.getByText("Forgot password?");
+      // Simulating a click on a button
+      userEvent.click(switchToRestoreMode);
+    });
+
+    // Checking that the modal window is displayed
+    await waitFor(() => {
+      const modalContent = screen.getByText("Restore your Prolink account");
+      expect(modalContent).toBeInTheDocument();
+    });
+
+    await waitFor(() => {
+      const modalMailLabel = screen.getByText("Mail");
+      expect(modalMailLabel).toBeInTheDocument();
+    });
+
+    await waitFor(() => {
+      const modalMailInput = screen.getByTestId("mail");
+      expect(modalMailInput).toBeInTheDocument();
+    });
+
+    await waitFor(() => {
+      const closeButton = screen.getByLabelText("close window");
+      expect(closeButton).toBeInTheDocument();
+    });
+
+    await waitFor(() => {
+      const closeButton = screen.getByLabelText("close window");
+      expect(closeButton).toBeInTheDocument();
+    });
+
+    // eslint-disable-next-line testing-library/no-unnecessary-act
+    act(() => {
+      // Find the "back" button
+      const switchToSignInMode = screen.getByText("back");
+      // Simulating a click on a button
+      userEvent.click(switchToSignInMode);
+    });
+
+    // Check that the modal window is no longer visible in the document
+    await waitFor(() => {
+      const modalContent = screen.queryByText("Restore your Prolink account");
+      expect(modalContent).toBeNull();
+    });
+
+    // Check that the modal window return back to sign in mode
+    await waitFor(() => {
+      const modalContent = screen.getByText("Sign in to Pro Link your account");
+      expect(modalContent).toBeInTheDocument();
     });
   });
 });

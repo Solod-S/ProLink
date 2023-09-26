@@ -55,6 +55,7 @@ function RestoreForm({ onClose, setOption }) {
                   // type="email"
                   name="mail"
                   id="mail"
+                  data-testid="mail"
                   placeholder=" "
                 />
                 <MailIcon size={19} aria-label="Mail icon" />

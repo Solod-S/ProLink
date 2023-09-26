@@ -65,6 +65,7 @@ function RegisterForm({ onClose }) {
                 <Input
                   // type="text"
                   name="name"
+                  data-testid="name"
                   id="name"
                   placeholder=" "
                 />
@@ -80,6 +81,7 @@ function RegisterForm({ onClose }) {
                 <Input
                   // type="text"
                   name="surname"
+                  data-testid="surname"
                   id="surname"
                   placeholder=" "
                 />
@@ -95,6 +97,7 @@ function RegisterForm({ onClose }) {
                 <Input
                   // type="email"
                   name="mail"
+                  data-testid="mail"
                   id="mail"
                   placeholder=" "
                 />
@@ -107,13 +110,13 @@ function RegisterForm({ onClose }) {
                 <Error name="password" component="div" />
               </ErrorWrapper>
               <Wrapper>
-                <Input type="password" name="password" id="password" placeholder=" " />
+                <Input type="password" name="password" id="password" data-testid="password" placeholder=" " />
                 <PasswordIcon size={19} aria-label="Password icon" />
               </Wrapper>
             </FormField>
             <CheckboxField>
               <CheckboxLabel htmlFor="policy">
-                <ChekboxInput type="checkbox" name="policy" id="policy" />
+                <ChekboxInput type="checkbox" name="policy" id="policy" data-testid="policy" />
                 <ChekboxSquare />
                 <span>
                   I accept

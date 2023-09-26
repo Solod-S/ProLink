@@ -19,6 +19,7 @@ const customStyles = {
 function ModalWindow({ isOpen, onClose, component }) {
   return (
     <Modal
+      ariaHideApp={false}
       isOpen={isOpen}
       //   onAfterOpen={afterOpenModal}
       onRequestClose={onClose}

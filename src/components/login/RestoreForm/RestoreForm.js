@@ -66,7 +66,7 @@ function RestoreForm({ onClose, setOption }) {
                 <RestoreNavigate onClick={() => setOption("login")}>back</RestoreNavigate>
               </span>
             </RestoreField>
-            <Button type="submit" disabled={isSubmitting}>
+            <Button type="submit" aria-label="submit button" disabled={isSubmitting}>
               Restore
             </Button>
           </ForM>

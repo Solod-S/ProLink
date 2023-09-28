@@ -59,7 +59,7 @@ function RegisterForm({ onClose }) {
             <FormField>
               <ErrorWrapper>
                 <InputLabel htmlFor="name">Name</InputLabel>
-                <Error name="name" component="div" />
+                <Error name="name" data-testid="name-error" component="div" />
               </ErrorWrapper>
               <Wrapper>
                 <Input
@@ -75,7 +75,7 @@ function RegisterForm({ onClose }) {
             <FormField>
               <ErrorWrapper>
                 <InputLabel htmlFor="surname">Surname</InputLabel>
-                <Error name="surname" component="div" />
+                <Error name="surname" data-testid="surname-error" component="div" />
               </ErrorWrapper>
               <Wrapper>
                 <Input
@@ -132,7 +132,7 @@ function RegisterForm({ onClose }) {
               </CheckboxLabel>
               <Error name="policy" component="div" style={{ textAlign: "end" }} />
             </CheckboxField>
-            <Button type="submit" disabled={isSubmitting}>
+            <Button type="submit" aria-label="submit button" disabled={isSubmitting}>
               Send
             </Button>
           </ForM>

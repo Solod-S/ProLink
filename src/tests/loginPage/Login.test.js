@@ -50,20 +50,14 @@ describe("LoginPage => Login Component Tests", () => {
     const linkedInSignInLink = screen.getByText("Sign in with LinkedIn");
     const githubSignInLink = screen.getByText("Sign in with Github");
 
+    // social btns link check
     expect(googleSignInLink).toHaveAttribute("href", "https://linkedinclone-backend.onrender.com/auth/google");
     expect(facebookSignInLink).toHaveAttribute("href", "https://linkedinclone-backend.onrender.com/auth/facebook");
     expect(linkedInSignInLink).toHaveAttribute("href", "https://linkedinclone-backend.onrender.com/auth/linkedin");
     expect(githubSignInLink).toHaveAttribute("href", "https://linkedinclone-backend.onrender.com/auth/github");
-    // social btns link check
-
-    userEvent.click(googleSignInLink);
-    userEvent.click(facebookSignInLink);
-    userEvent.click(linkedInSignInLink);
-    userEvent.click(githubSignInLink);
-    // clicks check
   });
 
-  test("Open/Close 'Joint now' modal", async () => {
+  test("Open/Close 'Joint now' modal window", async () => {
     render(
       <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}>
@@ -150,7 +144,7 @@ describe("LoginPage => Login Component Tests", () => {
     });
   });
 
-  test("Open/Close 'Sign In' modal", async () => {
+  test("Open/Close 'Sign In' modal window", async () => {
     render(
       <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}>
@@ -222,7 +216,7 @@ describe("LoginPage => Login Component Tests", () => {
     });
   });
 
-  test("Open/Close 'Restore account' modal", async () => {
+  test("Open/Close 'Restore account' modal window", async () => {
     render(
       <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}>
@@ -295,6 +289,540 @@ describe("LoginPage => Login Component Tests", () => {
     await waitFor(() => {
       const modalContent = screen.getByText("Sign in to Pro Link your account");
       expect(modalContent).toBeInTheDocument();
+    });
+  });
+
+  test("Validate invalid input in 'Joint now' modal window", async () => {
+    render(
+      <Provider store={store}>
+        <PersistGate loading={null} persistor={persistor}>
+          <ThemeProvider theme={theme}>
+            <BrowserRouter>
+              <Login />
+            </BrowserRouter>
+          </ThemeProvider>
+        </PersistGate>
+      </Provider>
+    );
+
+    // eslint-disable-next-line testing-library/no-unnecessary-act
+    act(() => {
+      // Find the "Joint now" button
+      const jointNowButton = screen.getByText("Joint now");
+      // Simulating a click on a button
+      userEvent.click(jointNowButton);
+    });
+
+    await waitFor(async () => {
+      const modalTitle = screen.getByText("Make the most of your professional life");
+      expect(modalTitle).toBeInTheDocument();
+    });
+
+    await waitFor(async () => {
+      expect(screen.getByTestId("name")).toHaveValue("");
+      // check that the input is empty
+    });
+
+    // eslint-disable-next-line testing-library/no-unnecessary-act
+    await act(async () => {
+      // Find "name" input and adding value
+      userEvent.type(screen.getByTestId("name"), "1");
+    });
+
+    await waitFor(async () => {
+      expect(screen.getByTestId("name")).toHaveValue("1");
+      // checking the input
+    });
+
+    await waitFor(async () => {
+      expect(screen.getByTestId("surname")).toHaveValue("");
+      // check that the input is empty
+    });
+
+    // eslint-disable-next-line testing-library/no-unnecessary-act
+    await act(async () => {
+      // Find "surname" input and adding value
+      userEvent.type(screen.getByTestId("surname"), "1");
+    });
+
+    await waitFor(async () => {
+      expect(screen.getByTestId("surname")).toHaveValue("1");
+      // checking the input
+    });
+
+    await waitFor(async () => {
+      expect(screen.getByTestId("mail")).toHaveValue("");
+      // check that the input is empty
+    });
+
+    // eslint-disable-next-line testing-library/no-unnecessary-act
+    await act(async () => {
+      // Find "mail" input and adding value
+      userEvent.type(screen.getByTestId("mail"), "1");
+    });
+
+    await waitFor(async () => {
+      expect(screen.getByTestId("mail")).toHaveValue("1");
+      // checking the input
+    });
+
+    await waitFor(async () => {
+      expect(screen.getByTestId("password")).toHaveValue("");
+      // check that the input is empty
+    });
+
+    // eslint-disable-next-line testing-library/no-unnecessary-act
+    await act(async () => {
+      // Find "password" input and adding value
+      userEvent.type(screen.getByTestId("password"), "1");
+    });
+
+    await waitFor(async () => {
+      expect(screen.getByTestId("password")).toHaveValue("1");
+      // checking the input
+    });
+
+    await waitFor(async () => {
+      expect(screen.getByTestId("policy")).not.toBeChecked();
+      // checking the checkbox
+    });
+
+    // eslint-disable-next-line testing-library/no-unnecessary-act
+    await act(async () => {
+      userEvent.click(screen.getByTestId("policy"));
+      // checkbox  is checked
+    });
+
+    await waitFor(async () => {
+      expect(screen.getByTestId("policy")).toBeChecked();
+      // checking the checkbox
+    });
+
+    // Attempted to send invalid data
+    // eslint-disable-next-line testing-library/no-unnecessary-act
+    await act(async () => {
+      // Find the "send" button
+      const sendButton = screen.getByLabelText("submit button");
+      // Simulating a click on a button
+      userEvent.click(sendButton);
+    });
+
+    // Check that the modal window is still visible in the document and nothing was sent
+    await waitFor(async () => {
+      const modalContent = screen.queryByText("Make the most of your professional life");
+      expect(modalContent).toBeInTheDocument();
+    });
+  });
+
+  test("Validate valid input in 'Joint now' modal window", async () => {
+    render(
+      <Provider store={store}>
+        <PersistGate loading={null} persistor={persistor}>
+          <ThemeProvider theme={theme}>
+            <BrowserRouter>
+              <Login />
+            </BrowserRouter>
+          </ThemeProvider>
+        </PersistGate>
+      </Provider>
+    );
+
+    // eslint-disable-next-line testing-library/no-unnecessary-act
+    act(() => {
+      // Find the "Joint now" button
+      const jointNowButton = screen.getByText("Joint now");
+      // Simulating a click on a button
+      userEvent.click(jointNowButton);
+    });
+
+    await waitFor(async () => {
+      const modalTitle = screen.getByText("Make the most of your professional life");
+      expect(modalTitle).toBeInTheDocument();
+    });
+
+    await waitFor(async () => {
+      expect(screen.getByTestId("name")).toHaveValue("");
+      // check that the input is empty
+    });
+
+    // eslint-disable-next-line testing-library/no-unnecessary-act
+    await act(async () => {
+      // Find "name" input and adding value
+      userEvent.type(screen.getByTestId("name"), "Sergey");
+    });
+
+    await waitFor(async () => {
+      expect(screen.getByTestId("name")).toHaveValue("Sergey");
+      // checking the input
+    });
+
+    await waitFor(async () => {
+      expect(screen.getByTestId("surname")).toHaveValue("");
+      // check that the input is empty
+    });
+
+    // eslint-disable-next-line testing-library/no-unnecessary-act
+    await act(async () => {
+      // Find "surname" input and adding value
+      userEvent.type(screen.getByTestId("surname"), "Solod");
+    });
+
+    await waitFor(async () => {
+      expect(screen.getByTestId("surname")).toHaveValue("Solod");
+      // checking the input
+    });
+
+    await waitFor(async () => {
+      expect(screen.getByTestId("mail")).toHaveValue("");
+      // check that the input is empty
+    });
+
+    // eslint-disable-next-line testing-library/no-unnecessary-act
+    await act(async () => {
+      // Find "mail" input and adding value
+      userEvent.type(screen.getByTestId("mail"), "solodsn098@gmail.com");
+    });
+
+    await waitFor(async () => {
+      expect(screen.getByTestId("mail")).toHaveValue("solodsn098@gmail.com");
+      // checking the input
+    });
+
+    await waitFor(async () => {
+      expect(screen.getByTestId("password")).toHaveValue("");
+      // check that the input is empty
+    });
+
+    // eslint-disable-next-line testing-library/no-unnecessary-act
+    await act(async () => {
+      // Find "password" input and adding value
+      userEvent.type(screen.getByTestId("password"), "123456");
+    });
+
+    await waitFor(async () => {
+      expect(screen.getByTestId("password")).toHaveValue("123456");
+      // checking the input
+    });
+
+    await waitFor(async () => {
+      expect(screen.getByTestId("policy")).not.toBeChecked();
+      // checking the checkbox
+    });
+
+    // eslint-disable-next-line testing-library/no-unnecessary-act
+    await act(async () => {
+      userEvent.click(screen.getByTestId("policy"));
+      // checkbox  is checked
+    });
+
+    await waitFor(async () => {
+      expect(screen.getByTestId("policy")).toBeChecked();
+      // checking the checkbox
+    });
+
+    // Attempted to send invalid data
+    // eslint-disable-next-line testing-library/no-unnecessary-act
+    await act(async () => {
+      // Find the "send" button
+      const sendButton = screen.getByLabelText("submit button");
+      // Simulating a click on a button
+      userEvent.click(sendButton);
+    });
+
+    // Check that the modal window is not visible in the document and nothing was sent
+    await waitFor(async () => {
+      const modalContent = screen.queryByText("Make the most of your professional life");
+      expect(modalContent).not.toBeInTheDocument();
+    });
+  });
+
+  test("Validate invalid input in 'Sign In' modal window", async () => {
+    render(
+      <Provider store={store}>
+        <PersistGate loading={null} persistor={persistor}>
+          <ThemeProvider theme={theme}>
+            <BrowserRouter>
+              <Login />
+            </BrowserRouter>
+          </ThemeProvider>
+        </PersistGate>
+      </Provider>
+    );
+
+    // eslint-disable-next-line testing-library/no-unnecessary-act
+    act(() => {
+      // Find the "Sign in" button
+      const signInButton = screen.getByText("Sign in");
+      // Simulating a click on a button
+      userEvent.click(signInButton);
+    });
+
+    // Checking that the modal window is displayed
+    await waitFor(async () => {
+      const modalContent = screen.getByText("Sign in to Pro Link your account");
+      expect(modalContent).toBeInTheDocument();
+    });
+
+    await waitFor(async () => {
+      expect(screen.getByTestId("mail")).toHaveValue("");
+      // check that the input is empty
+    });
+
+    // eslint-disable-next-line testing-library/no-unnecessary-act
+    await act(async () => {
+      // Find "mail" input and adding value
+      userEvent.type(screen.getByTestId("mail"), "1");
+    });
+
+    await waitFor(async () => {
+      expect(screen.getByTestId("mail")).toHaveValue("1");
+      // checking the input
+    });
+
+    await waitFor(async () => {
+      expect(screen.getByTestId("password")).toHaveValue("");
+      // check that the input is empty
+    });
+
+    // eslint-disable-next-line testing-library/no-unnecessary-act
+    await act(async () => {
+      // Find "password" input and adding value
+      userEvent.type(screen.getByTestId("password"), "1");
+    });
+
+    await waitFor(async () => {
+      expect(screen.getByTestId("password")).toHaveValue("1");
+      // checking the input
+    });
+
+    // eslint-disable-next-line testing-library/no-unnecessary-act
+    await act(async () => {
+      // Find "mail" input and adding value
+      userEvent.type(screen.getByTestId("password"), "1");
+    });
+
+    // Attempted to send invalid data
+    // eslint-disable-next-line testing-library/no-unnecessary-act
+    await act(async () => {
+      // Find the "send" button
+      const sendButton = screen.getByLabelText("submit button");
+      // Simulating a click on a button
+      userEvent.click(sendButton);
+    });
+
+    // Check that the modal window is still visible in the document and nothing was sent
+    await waitFor(async () => {
+      const modalContent = screen.queryByText("Sign in to Pro Link your account");
+      expect(modalContent).toBeInTheDocument();
+    });
+  });
+
+  test("Validate valid input in 'Sign In' modal window", async () => {
+    render(
+      <Provider store={store}>
+        <PersistGate loading={null} persistor={persistor}>
+          <ThemeProvider theme={theme}>
+            <BrowserRouter>
+              <Login />
+            </BrowserRouter>
+          </ThemeProvider>
+        </PersistGate>
+      </Provider>
+    );
+
+    // eslint-disable-next-line testing-library/no-unnecessary-act
+    act(() => {
+      // Find the "Sign in" button
+      const signInButton = screen.getByText("Sign in");
+      // Simulating a click on a button
+      userEvent.click(signInButton);
+    });
+
+    // Checking that the modal window is displayed
+    await waitFor(async () => {
+      const modalContent = screen.getByText("Sign in to Pro Link your account");
+      expect(modalContent).toBeInTheDocument();
+    });
+
+    await waitFor(async () => {
+      expect(screen.getByTestId("mail")).toHaveValue("");
+      // check that the input is empty
+    });
+
+    // eslint-disable-next-line testing-library/no-unnecessary-act
+    await act(async () => {
+      // Find "mail" input and adding value
+      userEvent.type(screen.getByTestId("mail"), "solodsn098@gmail.com");
+    });
+
+    await waitFor(async () => {
+      expect(screen.getByTestId("mail")).toHaveValue("solodsn098@gmail.com");
+      // checking the input
+    });
+
+    await waitFor(async () => {
+      expect(screen.getByTestId("password")).toHaveValue("");
+      // check that the input is empty
+    });
+
+    // eslint-disable-next-line testing-library/no-unnecessary-act
+    await act(async () => {
+      // Find "password" input and adding value
+      userEvent.type(screen.getByTestId("password"), "123456");
+    });
+
+    await waitFor(async () => {
+      expect(screen.getByTestId("password")).toHaveValue("123456");
+      // checking the input
+    });
+
+    // Attempted to send invalid data
+    // eslint-disable-next-line testing-library/no-unnecessary-act
+    await act(async () => {
+      // Find the "send" button
+      const sendButton = screen.getByLabelText("submit button");
+      // Simulating a click on a button
+      userEvent.click(sendButton);
+    });
+
+    // Check that the modal window is still visible in the document and nothing was sent
+    await waitFor(async () => {
+      const modalContent = screen.queryByText("Sign in to Pro Link your account");
+      expect(modalContent).not.toBeInTheDocument();
+    });
+  });
+
+  test("Validate invalid input in 'Restore account", async () => {
+    render(
+      <Provider store={store}>
+        <PersistGate loading={null} persistor={persistor}>
+          <ThemeProvider theme={theme}>
+            <BrowserRouter>
+              <Login />
+            </BrowserRouter>
+          </ThemeProvider>
+        </PersistGate>
+      </Provider>
+    );
+
+    // eslint-disable-next-line testing-library/no-unnecessary-act
+    act(() => {
+      // Find the "Sign in" button
+      const signInButton = screen.getByText("Sign in");
+      // Simulating a click on a button
+      userEvent.click(signInButton);
+    });
+
+    // eslint-disable-next-line testing-library/no-unnecessary-act
+    act(() => {
+      // Find the "Forgot password?" button
+      const switchToRestoreMode = screen.getByText("Forgot password?");
+      // Simulating a click on a button
+      userEvent.click(switchToRestoreMode);
+    });
+
+    // Checking that the modal window is displayed
+    await waitFor(() => {
+      const modalContent = screen.getByText("Restore your Prolink account");
+      expect(modalContent).toBeInTheDocument();
+    });
+
+    await waitFor(async () => {
+      expect(screen.getByTestId("mail")).toHaveValue("");
+      // check that the input is empty
+    });
+
+    // eslint-disable-next-line testing-library/no-unnecessary-act
+    await act(async () => {
+      // Find "mail" input and adding value
+      userEvent.type(screen.getByTestId("mail"), "1");
+    });
+
+    await waitFor(async () => {
+      expect(screen.getByTestId("mail")).toHaveValue("1");
+      // checking the input
+    });
+
+    // Attempted to send invalid data
+    // eslint-disable-next-line testing-library/no-unnecessary-act
+    await act(async () => {
+      // Find the "send" button
+      const sendButton = screen.getByLabelText("submit button");
+      // Simulating a click on a button
+      userEvent.click(sendButton);
+    });
+
+    // Check that the modal window is still visible in the document and nothing was sent
+    await waitFor(async () => {
+      const modalContent = screen.queryByText("Restore your Prolink account");
+      expect(modalContent).toBeInTheDocument();
+    });
+  });
+
+  test("Validate valid input in 'Restore account", async () => {
+    render(
+      <Provider store={store}>
+        <PersistGate loading={null} persistor={persistor}>
+          <ThemeProvider theme={theme}>
+            <BrowserRouter>
+              <Login />
+            </BrowserRouter>
+          </ThemeProvider>
+        </PersistGate>
+      </Provider>
+    );
+
+    // eslint-disable-next-line testing-library/no-unnecessary-act
+    act(() => {
+      // Find the "Sign in" button
+      const signInButton = screen.getByText("Sign in");
+      // Simulating a click on a button
+      userEvent.click(signInButton);
+    });
+
+    // eslint-disable-next-line testing-library/no-unnecessary-act
+    act(() => {
+      // Find the "Forgot password?" button
+      const switchToRestoreMode = screen.getByText("Forgot password?");
+      // Simulating a click on a button
+      userEvent.click(switchToRestoreMode);
+    });
+
+    // Checking that the modal window is displayed
+    await waitFor(() => {
+      const modalContent = screen.getByText("Restore your Prolink account");
+      expect(modalContent).toBeInTheDocument();
+    });
+
+    await waitFor(async () => {
+      expect(screen.getByTestId("mail")).toHaveValue("");
+      // check that the input is empty
+    });
+
+    // eslint-disable-next-line testing-library/no-unnecessary-act
+    await act(async () => {
+      // Find "mail" input and adding value
+      userEvent.type(screen.getByTestId("mail"), "solodsn098@gmail.com");
+    });
+
+    await waitFor(async () => {
+      expect(screen.getByTestId("mail")).toHaveValue("solodsn098@gmail.com");
+      // checking the input
+    });
+
+    // Attempted to send invalid data
+    // eslint-disable-next-line testing-library/no-unnecessary-act
+    await act(async () => {
+      // Find the "send" button
+      const sendButton = screen.getByLabelText("submit button");
+      // Simulating a click on a button
+      userEvent.click(sendButton);
+    });
+
+    // Check that the modal window is still visible in the document and nothing was sent
+    await waitFor(async () => {
+      const modalContent = screen.queryByText("Restore your Prolink account");
+      expect(modalContent).not.toBeInTheDocument();
     });
   });
 });

@@ -77,7 +77,7 @@ function LoginForm({ onClose, setOption }) {
                 <RestoreNavigate onClick={() => setOption("restore")}>Forgot password?</RestoreNavigate>
               </span>
             </RestoreField>
-            <Button type="submit" disabled={isSubmitting}>
+            <Button type="submit" aria-label="submit button" disabled={isSubmitting}>
               Login
             </Button>
           </ForM>

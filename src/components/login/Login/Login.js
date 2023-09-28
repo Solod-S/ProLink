@@ -76,7 +76,7 @@ const LoginComponent = () => {
           <img src={hero} alt="hero" />
         </Hero>
       </Section>
-      <Form id="social_login">
+      <Form id="social_login" data-testid="social_login">
         <SocialBtn href={`${REACT_APP_BAKEND_BASE_URL}/auth/google`}>
           <img src={google} alt="google" /> Sign in with Google
         </SocialBtn>

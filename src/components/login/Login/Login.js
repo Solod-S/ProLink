@@ -46,7 +46,7 @@ const LoginComponent = () => {
   };
 
   return (
-    <Container data-testid="root">
+    <Container data-testid="root" aria-label="login-page">
       <ToastContainer
         position="bottom-right"
         autoClose={5000}

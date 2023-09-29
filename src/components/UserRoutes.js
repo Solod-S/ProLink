@@ -1,9 +1,10 @@
 import { lazy, Suspense } from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
 import { setNavigate } from "../service/axios/axios";
-import { useNavigate } from "react-router-dom";
-
+import { useNavigate, useLocation } from "react-router-dom";
+import { useEffect } from "react";
 import { PrivateRoute, PublicRoute, SharedLayout, Loader } from "./index";
+import { useAuth } from "../hooks";
 
 const LoginPage = lazy(() => import("../pages/LoginPage/LoginPage"));
 const HomePage = lazy(() => import("../pages/HomePage/HomePage"));
@@ -12,7 +13,21 @@ const PasswordRestorePage = lazy(() => import("../pages/PasswordRestorePage/Pass
 
 const UserRoutes = () => {
   const navigate = useNavigate();
+  const location = useLocation();
+
+  const isLogin = useAuth();
   setNavigate(navigate);
+  useEffect(() => {
+    function RedirectIfLoggedIn() {
+      // Check the user is logged in and the current path "/"
+      if (isLogin && location.pathname === "/") {
+        navigate("/home");
+      }
+
+      return null;
+    }
+    RedirectIfLoggedIn();
+  }, [isLogin, location.pathname, navigate]);
   return (
     <Suspense fallback={<Loader />}>
       <Routes>

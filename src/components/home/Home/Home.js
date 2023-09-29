@@ -6,7 +6,7 @@ import RigthSide from "../RightSide/RightSide";
 
 const Home = () => {
   return (
-    <Container>
+    <Container aria-label="home-page">
       <Section>
         <h5>
           <a href="https://www.google.com" target="_blank" rel="noopener noreferrer">

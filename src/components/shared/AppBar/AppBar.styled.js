@@ -9,10 +9,10 @@ import navJobs from "../../../img/shared_layout/app_bar/nav-jobs.svg";
 import navMessaging from "../../../img/shared_layout/app_bar/nav-messaging.svg";
 import navNotification from "../../../img/shared_layout/app_bar/nav-notifications.svg";
 import navWork from "../../../img/shared_layout/app_bar/nav-work.svg";
-import user from "../../../img/shared_layout/app_bar/user.svg";
+import userIcon from "../../../img/shared_layout/app_bar/user.svg";
 import dpopDownMenu from "../../../img/shared_layout/app_bar/down-icon.svg";
 
-export { logo, search, navHome, navNetwork, navJobs, navMessaging, navNotification, navWork, user, dpopDownMenu };
+export { logo, search, navHome, navNetwork, navJobs, navMessaging, navNotification, navWork, userIcon, dpopDownMenu };
 
 export const Container = styled.div`
   background-color: white;
@@ -149,6 +149,25 @@ export const NavListItem = styled.li`
         color: ${(p) => p.theme.colors.bordeFontrColor};
       }
     }
+  }
+`;
+
+export const NavListProfileDropDown = styled.div`
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  font-size: 12px;
+  font-weight: 400;
+  justify-content: center;
+  line-height: 1.5;
+  min-height: 42px;
+  min-width: 80px;
+  position: relative;
+  @media (min-width: ${(p) => p.theme.breakpoints.mobile}) and (max-width: ${(p) => p.theme.breakpoints.tablet}) {
+    min-width: 70px;
+  }
+  @media (max-width: ${(p) => p.theme.breakpoints.mobile}) {
+    min-width: 48px;
   }
 `;
 

@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-import user from "../../../img/home/main_side/user.svg";
+import userIcon from "../../../img/home/main_side/user.svg";
 import photo from "../../../img/home/main_side/photo-icon.svg";
 import event from "../../../img/home/main_side/event.svg";
 import video from "../../../img/home/main_side/video.svg";
@@ -15,7 +15,7 @@ import sendAction from "../../../img/home/main_side/sendAction.svg";
 import loadinSpiner from "../../../img/home/main_side/spin-loader.gif";
 
 export {
-  user,
+  userIcon,
   photo,
   event,
   video,

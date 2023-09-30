@@ -43,7 +43,6 @@ export const createNewPassword = createAsyncThunk("auth/new-password", async (cr
     return data;
   } catch (error) {
     if (error.response.status === 404) {
-      console.log(`ss`);
       toast.error(`"Operation time has expired"`);
     }
     localStorage.removeItem("refreshToken");

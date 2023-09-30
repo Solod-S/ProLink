@@ -1,5 +1,12 @@
+import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import { getUserData } from "../../../redux/auth/authSelectors";
+import { getMyPostsRefreshStatus } from "../../../redux/myPosts/myPostsSelectors";
+import ReactPlayer from "react-player";
+import { PostModal } from "../../index";
+
 import {
-  user,
+  userIcon,
   photo,
   event,
   video,
@@ -22,12 +29,6 @@ import {
   SocialActions,
   Content,
 } from "../MainSide/MainSide.styled";
-import { useState } from "react";
-import ReactPlayer from "react-player";
-
-// import PostModal from "../../shared/Post/PostModal";
-
-// temporary
 
 const articles = [
   {
@@ -43,13 +44,24 @@ const articles = [
     comments: 1,
   },
 ];
-const userData = { photoURL: "https://cdn.icon-icons.com/icons2/2468/PNG/512/user_icon_149329.png" };
-let loading = false;
 
 // temporary
 
 const MainSide = () => {
+  const userData = useSelector(getUserData);
+  const isRefreshing = useSelector(getMyPostsRefreshStatus);
+
+  const [user, setuser] = useState({});
+  const [isLoading, setisisLoading] = useState(false);
   const [showModal, setshowModal] = useState("close");
+
+  useEffect(() => {
+    setuser(userData);
+  }, [user, userData]);
+
+  useEffect(() => {
+    setisisLoading(isRefreshing);
+  }, [isRefreshing]);
 
   const handleClick = (e) => {
     e.preventDefault();
@@ -78,72 +90,72 @@ const MainSide = () => {
           <p>There are no articles</p>
           <ShareBox>
             <div>
-              {userData && userData.photoURL ? (
-                <img src={userData.photoURL} alt="user icon" />
+              {user?.avatarURL?.url ? (
+                <img src={user?.avatarURL?.url} alt="user icon" />
               ) : (
-                <img src={user} alt="user icon" />
+                <img src={userIcon} alt="user icon" />
               )}
 
-              <button onClick={handleClick} disabled={loading ? true : false}>
+              <button onClick={handleClick} disabled={isLoading ? true : false}>
                 Start a post
               </button>
             </div>
             <div>
-              <button>
+              <button onClick={() => setshowModal("open")} disabled={isLoading ? true : false}>
                 <img src={photo} alt="photocard icon" />
                 <span>Photo</span>
               </button>
-              <button>
+              <button onClick={() => setshowModal("open")} disabled={isLoading ? true : false}>
                 <img src={video} alt="video icon" />
                 <span>Video</span>
               </button>
-              <button>
+              <button onClick={() => setshowModal("open")} disabled={isLoading ? true : false}>
                 <img src={event} alt="event icon" />
                 <span>Event</span>
               </button>
-              <button>
+              <button onClick={() => setshowModal("open")} disabled={isLoading ? true : false}>
                 <img src={article} alt="article icon" />
                 <span>Write article</span>
               </button>
             </div>
           </ShareBox>
-          {/* <PostModal showModal={showModal} handleClick={handleClick} /> */}
+          <PostModal user={user} showModal={showModal} handleClick={handleClick} />
         </Container>
       ) : (
         <Container>
           <ShareBox>
             <div>
-              {userData && userData.photoURL ? (
-                <img src={userData.photoURL} alt="user icon" />
+              {user?.avatarURL?.url ? (
+                <img src={user?.avatarURL?.url} alt="user icon" />
               ) : (
-                <img src={user} alt="user icon" />
+                <img src={userIcon} alt="user icon" />
               )}
 
-              <button onClick={handleClick} disabled={loading ? true : false}>
+              <button onClick={handleClick} disabled={isLoading ? true : false}>
                 Start a post
               </button>
             </div>
             <div>
-              <button>
+              <button onClick={() => setshowModal("open")} disabled={isLoading ? true : false}>
                 <img src={photo} alt="photocard icon" />
                 <span>Photo</span>
               </button>
-              <button>
+              <button onClick={() => setshowModal("open")} disabled={isLoading ? true : false}>
                 <img src={video} alt="video icon" />
                 <span>Video</span>
               </button>
-              <button>
+              <button onClick={() => setshowModal("open")} disabled={isLoading ? true : false}>
                 <img src={event} alt="event icon" />
                 <span>Event</span>
               </button>
-              <button>
+              <button onClick={() => setshowModal("open")} disabled={isLoading ? true : false}>
                 <img src={article} alt="article icon" />
                 <span>Write article</span>
               </button>
             </div>
           </ShareBox>
           <Content>
-            {loading && <img src={loadinSpiner} alt="loding spiner" />}
+            {isLoading && <img src={loadinSpiner} alt="loding spiner" />}
             {articles.length > 0 &&
               articles.map((article, index) => (
                 <Article key={index}>
@@ -206,7 +218,7 @@ const MainSide = () => {
                 </Article>
               ))}
           </Content>
-          {/* <PostModal showModal={showModal} handleClick={handleClick} /> */}
+          <PostModal user={user} showModal={showModal} handleClick={handleClick} />
         </Container>
       )}
     </>

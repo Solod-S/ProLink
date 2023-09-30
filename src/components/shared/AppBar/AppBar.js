@@ -1,7 +1,8 @@
 import { NavLink } from "react-router-dom";
-import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { logOut } from "../../../redux/auth/authOperation";
+import { getUserData } from "../../../redux/auth/authSelectors";
 
 import {
   logo,
@@ -12,7 +13,7 @@ import {
   navMessaging,
   navNotification,
   navWork,
-  user,
+  userIcon,
   dpopDownMenu,
   Container,
   Content,
@@ -23,14 +24,23 @@ import {
   Nav,
   NavListWrap,
   NavListItem,
+  NavListProfileDropDown,
   User,
   Work,
   SignOut,
 } from "./AppBar.styled";
 
 const AppBar = (props) => {
+  const userData = useSelector(getUserData);
   const dispatch = useDispatch();
+
+  const [user, setuser] = useState();
   const [profileDropDownMenu, setProfiledropDownMenu] = useState(false);
+
+  useEffect(() => {
+    setuser(userData);
+  }, [user, userData]);
+
   return (
     <Container>
       <Content>
@@ -58,7 +68,7 @@ const AppBar = (props) => {
             <NavListItem>
               <NavLink to="/my-network">
                 <img src={navNetwork} alt="navigation-network icon" />
-                <span>My Network</span>
+                <span>Network</span>
               </NavLink>
             </NavListItem>
             <NavListItem>
@@ -83,17 +93,17 @@ const AppBar = (props) => {
               profileDropDownMenu={profileDropDownMenu}
               onClick={() => setProfiledropDownMenu(!profileDropDownMenu)}
             >
-              <div>
-                {props.user && props.user.photoURL ? (
-                  <img src={props.user.photoURL} alt="user icon" />
+              <NavListProfileDropDown>
+                {user?.avatarURL?.url ? (
+                  <img src={user?.avatarURL?.url} alt="user icon" />
                 ) : (
-                  <img src={user} alt="user icon" />
+                  <img src={userIcon} alt="user icon" />
                 )}
                 <span>
                   Me
                   <img src={dpopDownMenu} alt="dpop-down menu icon" />
                 </span>
-              </div>
+              </NavListProfileDropDown>
               <SignOut onClick={() => dispatch(logOut())}>
                 <button>Sign Out</button>
               </SignOut>

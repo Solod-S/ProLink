@@ -11,6 +11,7 @@ import PrivateRoute from "./shared/PrivateRoute/PrivateRoute";
 import PublicRoute from "./shared/PublicRoute/PublicRoute";
 import Loader from "./shared/Loader/Loader";
 import RestorePassForm from "./passwordRestore/RestorePassForm";
+import PostModal from "./shared/PostModal/PostModal";
 
 export {
   Login,
@@ -26,4 +27,5 @@ export {
   PublicRoute,
   Loader,
   RestorePassForm,
+  PostModal,
 };

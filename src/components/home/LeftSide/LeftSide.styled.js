@@ -39,9 +39,8 @@ export const CardBackGround = styled.div`
   margin: -12px -12px 0;
 `;
 
-export const Photo = styled.div`
+export const PhotoWrapper = styled.div`
   box-shadow: none;
-  background-image: url(${photo});
   /* content: ""; */
   width: 72px;
   height: 72px;
@@ -53,6 +52,19 @@ export const Photo = styled.div`
   background-repeat: no-repeat;
   border: 2px solid white;
   margin: -38px auto 12px;
+  border-radius: 50%;
+`;
+export const Photo = styled.img`
+  background-image: ${(props) => (props.userPhoto ? `url(${props.userPhoto})` : `url(${photo})`)};
+  /* content: ""; */
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  background-clip: content-box;
+  background-color: white;
+  background-position: center;
+  background-size: ${(props) => (props.userPhoto ? `100%` : `60%`)};
+  background-repeat: no-repeat;
   border-radius: 50%;
 `;
 

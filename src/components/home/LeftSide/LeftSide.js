@@ -1,3 +1,7 @@
+import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import { getUserData } from "../../../redux/auth/authSelectors";
+
 import {
   widget,
   item,
@@ -6,6 +10,7 @@ import {
   ArtCard,
   UserInfo,
   CardBackGround,
+  PhotoWrapper,
   Photo,
   Link,
   AddPhotoText,
@@ -15,14 +20,22 @@ import {
 } from "./LeftSide.styled";
 
 const LeftSide = () => {
+  const userData = useSelector(getUserData);
+  const [user, setuser] = useState();
+
+  useEffect(() => {
+    setuser(userData);
+  }, [user, userData]);
   return (
     <Container>
       <ArtCard>
         <UserInfo>
           <CardBackGround />
           <a href="/LinkedInClone/home" target="_blank" rel="noopener noreferrer">
-            <Photo />
-            <Link>Welcome, USER!</Link>
+            <PhotoWrapper>
+              <Photo userPhoto={user?.avatarURL?.url} />
+            </PhotoWrapper>
+            <Link>Welcome, {user?.name}</Link>
           </a>
           <a href="/LinkedInClone/home" target="_blank" rel="noopener noreferrer">
             <AddPhotoText>Add a photo</AddPhotoText>

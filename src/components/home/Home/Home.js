@@ -1,4 +1,5 @@
 import { Container, Section, Layout } from "./Home.styled";
+import { ToastContainer } from "react-toastify";
 
 import LeftSide from "../LeftSide/LeftSide";
 import MainSide from "../MainSide/MainSide";
@@ -20,6 +21,18 @@ const Home = () => {
         <MainSide />
         <RigthSide />
       </Layout>
+      <ToastContainer
+        position="bottom-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
     </Container>
   );
 };

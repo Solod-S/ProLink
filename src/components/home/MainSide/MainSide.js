@@ -119,7 +119,7 @@ const MainSide = () => {
               </button>
             </div>
           </ShareBox>
-          <PostModal user={user} showModal={showModal} handleClick={handleClick} />
+          <PostModal user={user} showModal={showModal} handleClick={handleClick} location="posts" />
         </Container>
       ) : (
         <Container>
@@ -218,7 +218,7 @@ const MainSide = () => {
                 </Article>
               ))}
           </Content>
-          <PostModal user={user} showModal={showModal} handleClick={handleClick} />
+          <PostModal user={user} showModal={showModal} handleClick={handleClick} location="posts" />
         </Container>
       )}
     </>

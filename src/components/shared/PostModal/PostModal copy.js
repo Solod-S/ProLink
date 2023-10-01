@@ -1,11 +1,7 @@
-import { useState } from "react";
 import ReactPlayer from "react-player";
-import ReactQuill from "react-quill";
 import { useDispatch } from "react-redux";
-
 import { createMyPost } from "../../../redux/myPosts/myPostsOperation";
-
-import "react-quill/dist/quill.snow.css"; // импортируйте стили
+import { useState } from "react";
 
 import {
   Container,
@@ -28,23 +24,12 @@ import {
   UploadImageButton,
 } from "./PostModal.styled.Post";
 
-const PostModal = ({ user, showModal, handleClick, location }) => {
+const PostModal = ({ user, showModal, handleClick }) => {
   const dispatch = useDispatch();
   const [editorText, setEditorText] = useState("");
   const [shareImage, setShareImage] = useState("");
   const [videoLink, setVideoLink] = useState("");
   const [assetArea, setAssetArea] = useState("");
-
-  const modules = {
-    // toolbar: [
-    //   [{ header: "1" }, { header: "2" }, { font: [] }],
-    //   [{ list: "ordered" }, { list: "bullet" }],
-    //   ["bold", "italic", "underline"],
-    //   ["link"],
-    //   [{ align: [] }],
-    // ],
-    toolbar: false,
-  };
 
   const handleChange = (e) => {
     const image = e.target.files[0];
@@ -68,12 +53,10 @@ const PostModal = ({ user, showModal, handleClick, location }) => {
     }
 
     const payload = {
-      mediaFile: shareImage ? shareImage : videoLink ? videoLink : "",
-      mediaFileType: shareImage ? "img" : videoLink ? "video" : "",
-      location,
+      // image: shareImage,
+      // video: videoLink,
       description: editorText,
     };
-
     dispatch(createMyPost(payload));
     reset(e);
   };
@@ -106,20 +89,12 @@ const PostModal = ({ user, showModal, handleClick, location }) => {
                 )}
                 <span>{user?.name}</span>
               </UserInfo>
-              {/* <Editor>
+              <Editor>
                 <textarea
                   placeholder="What do you want to talk about?"
                   autoFocus={true}
                   value={editorText}
                   onChange={(e) => setEditorText(e.target.value)}
-                />
-              </Editor> */}
-              <Editor>
-                <ReactQuill
-                  value={editorText}
-                  onChange={(value) => setEditorText(value)}
-                  modules={modules} // Передайте конфигурацию модулей здесь
-                  style={{ height: "100px", marginBottom: "10px" }} // Настройте высоту как вам нужно
                 />
                 {assetArea === "image" ? (
                   <UploadImage>
@@ -146,9 +121,8 @@ const PostModal = ({ user, showModal, handleClick, location }) => {
                         placeholder="Please input a video link"
                         value={videoLink}
                         onChange={(e) => setVideoLink(e.target.value)}
-                        style={{ boxSizing: "border-box" }}
                       />
-                      {videoLink && <ReactPlayer width={"100%"} controls={true} url={videoLink} />}
+                      {videoLink && <ReactPlayer width={"101%"} controls={true} url={videoLink} />}
                     </>
                   )
                 )}

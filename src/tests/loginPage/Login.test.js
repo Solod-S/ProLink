@@ -1,16 +1,17 @@
-import React from "react";
+import { render, screen, waitFor, act } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
+
 import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
 import { persistor, store } from "../../redux/store";
-import { render, screen, waitFor, act } from "@testing-library/react";
-import userEvent from "@testing-library/user-event";
 import { BrowserRouter, MemoryRouter } from "react-router-dom";
 import { ThemeProvider } from "styled-components";
+
 import { theme } from "../../constants/theme";
 import { Login } from "../../components";
 
 describe("LoginPage => Login Component Tests", () => {
-  test("Rendering elements test", () => {
+  test("Rendering Login Page elements test", () => {
     render(
       <ThemeProvider theme={theme}>
         <BrowserRouter>
@@ -84,49 +85,46 @@ describe("LoginPage => Login Component Tests", () => {
       expect(modalTitle).toBeInTheDocument();
     });
 
-    await waitFor(() => {
-      const modalNameLabel = screen.getByText("Name");
-      expect(modalNameLabel).toBeInTheDocument();
-    });
-
-    await waitFor(() => {
-      const modalMailLabel = screen.getByText("Mail");
-      expect(modalMailLabel).toBeInTheDocument();
-    });
-
-    await waitFor(() => {
-      const modalPasswordLabel = screen.getByText("Password");
-      expect(modalPasswordLabel).toBeInTheDocument();
-    });
-
-    await waitFor(() => {
-      const modalNameInput = screen.getByTestId("name");
-      expect(modalNameInput).toBeInTheDocument();
-    });
-
-    await waitFor(() => {
-      const modalMailInput = screen.getByTestId("mail");
-      expect(modalMailInput).toBeInTheDocument();
-    });
-
-    await waitFor(() => {
-      const modalPasswordInput = screen.getByTestId("password");
-      expect(modalPasswordInput).toBeInTheDocument();
-    });
-
-    await waitFor(() => {
-      const modalPolicyInput = screen.getByTestId("policy");
-      expect(modalPolicyInput).toBeInTheDocument();
-    });
-
-    await waitFor(() => {
-      const sendButton = screen.getByText("Send");
-      expect(sendButton).toBeInTheDocument();
-    });
-
-    await waitFor(() => {
+    // eslint-disable-next-line testing-library/no-unnecessary-act
+    act(() => {
+      // Find the "close" button
       const closeButton = screen.getByLabelText("close window");
-      expect(closeButton).toBeInTheDocument();
+      // Simulating a click on a button
+      userEvent.click(closeButton);
+    });
+
+    // Check that the modal window is no longer visible in the document
+    await waitFor(() => {
+      const modalContent = screen.queryByText("Make the most of your professional life");
+      expect(modalContent).toBeNull();
+    });
+  });
+
+  test("Render check 'Joint now' modal window", async () => {
+    render(
+      <Provider store={store}>
+        <PersistGate loading={null} persistor={persistor}>
+          <ThemeProvider theme={theme}>
+            <BrowserRouter>
+              <Login />
+            </BrowserRouter>
+          </ThemeProvider>
+        </PersistGate>
+      </Provider>
+    );
+
+    // eslint-disable-next-line testing-library/no-unnecessary-act
+    act(() => {
+      // Find the "Joint now" button
+      const jointNowButton = screen.getByText("Joint now");
+      // Simulating a click on a button
+      userEvent.click(jointNowButton);
+    });
+
+    // Checking that the modal window is displayed
+    await waitFor(() => {
+      const modalTitle = screen.getByText("Make the most of your professional life");
+      expect(modalTitle).toBeInTheDocument();
     });
 
     // eslint-disable-next-line testing-library/no-unnecessary-act
@@ -145,6 +143,48 @@ describe("LoginPage => Login Component Tests", () => {
   });
 
   test("Open/Close 'Sign In' modal window", async () => {
+    render(
+      <Provider store={store}>
+        <PersistGate loading={null} persistor={persistor}>
+          <ThemeProvider theme={theme}>
+            <BrowserRouter>
+              <Login />
+            </BrowserRouter>
+          </ThemeProvider>
+        </PersistGate>
+      </Provider>
+    );
+
+    // eslint-disable-next-line testing-library/no-unnecessary-act
+    act(() => {
+      // Find the "Sign in" button
+      const signInButton = screen.getByText("Sign in");
+      // Simulating a click on a button
+      userEvent.click(signInButton);
+    });
+
+    // Checking that the modal window is displayed
+    await waitFor(() => {
+      const modalContent = screen.getByText("Sign in to Pro Link your account");
+      expect(modalContent).toBeInTheDocument();
+    });
+
+    // eslint-disable-next-line testing-library/no-unnecessary-act
+    act(() => {
+      // Find the "close" button
+      const closeButton = screen.getByLabelText("close window");
+      // Simulating a click on a button
+      userEvent.click(closeButton);
+    });
+
+    // Check that the modal window is no longer visible in the document
+    await waitFor(() => {
+      const modalContent = screen.queryByText("Sign in to Pro Link your account");
+      expect(modalContent).toBeNull();
+    });
+  });
+
+  test("Render check 'Sign In' modal window", async () => {
     render(
       <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}>
@@ -217,6 +257,56 @@ describe("LoginPage => Login Component Tests", () => {
   });
 
   test("Open/Close 'Restore account' modal window", async () => {
+    render(
+      <Provider store={store}>
+        <PersistGate loading={null} persistor={persistor}>
+          <ThemeProvider theme={theme}>
+            <BrowserRouter>
+              <Login />
+            </BrowserRouter>
+          </ThemeProvider>
+        </PersistGate>
+      </Provider>
+    );
+
+    // eslint-disable-next-line testing-library/no-unnecessary-act
+    act(() => {
+      // Find the "Sign in" button
+      const signInButton = screen.getByText("Sign in");
+      // Simulating a click on a button
+      userEvent.click(signInButton);
+    });
+
+    // eslint-disable-next-line testing-library/no-unnecessary-act
+    act(() => {
+      // Find the "Forgot password?" button
+      const switchToRestoreMode = screen.getByText("Forgot password?");
+      // Simulating a click on a button
+      userEvent.click(switchToRestoreMode);
+    });
+
+    // Checking that the modal window is displayed
+    await waitFor(() => {
+      const modalContent = screen.getByText("Restore your Prolink account");
+      expect(modalContent).toBeInTheDocument();
+    });
+
+    // eslint-disable-next-line testing-library/no-unnecessary-act
+    act(() => {
+      // Find the "close" button
+      const closeButton = screen.getByLabelText("close window");
+      // Simulating a click on a button
+      userEvent.click(closeButton);
+    });
+
+    // Check that the modal window is no longer visible in the document
+    await waitFor(() => {
+      const modalContent = screen.queryByText("Restore your Prolink account");
+      expect(modalContent).toBeNull();
+    });
+  });
+
+  test("Render check 'Restore account' modal window", async () => {
     render(
       <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}>

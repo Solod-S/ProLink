@@ -81,7 +81,7 @@ const LoginComponent = () => {
           <img src={google} alt="google" /> Sign in with Google
         </SocialBtn>
         <SocialBtn href={`${REACT_APP_BAKEND_BASE_URL}/auth/facebook`}>
-          <img src={facebook} alt="google" /> Sign in with FaceBook
+          <img src={facebook} alt="facebook" /> Sign in with FaceBook
         </SocialBtn>
         <SocialBtn href={`${REACT_APP_BAKEND_BASE_URL}/auth/linkedin`}>
           <img src={linkedIn} alt="linkedIn" /> Sign in with LinkedIn

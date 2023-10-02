@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const { REACT_APP_BAKEND_BASE_URL } = process.env;
+const { REACT_APP_BAKEND_BASE_URL, REACT_APP_CLOUDINARY_BASE_URL } = process.env;
 
 let navigate;
 
@@ -60,3 +60,7 @@ socialNetworkAxiosInstance.interceptors.response.use(
   }
 );
 // принимает две функции (первая удачная операция), во второй ловим ошибки и делаем свои делишки
+
+export const cloudinaryAxiosInstance = axios.create({
+  baseURL: REACT_APP_CLOUDINARY_BASE_URL,
+});

@@ -1,6 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import * as MyPostApi from "../../service/API/MyPostAPI";
 import * as MediaFilesApi from "../../service/API/MediaFilesAPI ";
+import * as CloudinaryApi from "../../service/API/CloudinaryAPI";
 import { toast } from "react-toastify";
 
 export const fetchMyPosts = createAsyncThunk("own-posts/", async (_, thunkAPI) => {
@@ -41,13 +42,15 @@ export const createMyPost = createAsyncThunk("own-posts/add", async (body, thunk
     if (mediaFile) {
       if (mediaFileType === "img") {
         const postData = await MyPostApi.createMyPost({ description });
+        const cloudinaryData = await CloudinaryApi.uploadFileToCloudinary(mediaFile);
         const mediaFIleData = await MediaFilesApi.createMediaFile({
           type: mediaFileType,
           location,
-          url: "mediaFile",
-          providerPublicId: "cloudinary",
+          url: cloudinaryData.secure_url,
+          providerPublicId: cloudinaryData.public_id,
           postId: postData.data.post._id,
         });
+        console.log(cloudinaryData);
         postData.data.post.mediaFiles = mediaFIleData.data.mediaFile;
         toast.success(`Your post was successfully created`);
         return postData;

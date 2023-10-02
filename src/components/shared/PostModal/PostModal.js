@@ -93,16 +93,16 @@ const PostModal = ({ user, showModal, handleClick, location }) => {
           <Contant>
             <Header>
               <h2>Create a post</h2>
-              <button onClick={(e) => reset(e)}>
+              <button onClick={(e) => reset(e)} aria-label="close window">
                 <img src={close} alt="close icon" />
               </button>
             </Header>
             <SharedContent>
               <UserInfo>
                 {user?.avatarURL?.url ? (
-                  <img src={user?.avatarURL?.url} alt="user icon" />
+                  <img src={user?.avatarURL?.url} alt="my user icon" />
                 ) : (
-                  <img src={userIcon} alt="user icon" />
+                  <img src={userIcon} alt="my user icon" />
                 )}
                 <span>{user?.name}</span>
               </UserInfo>
@@ -116,6 +116,7 @@ const PostModal = ({ user, showModal, handleClick, location }) => {
               </Editor> */}
               <Editor>
                 <ReactQuill
+                  data-testid="react-quill"
                   value={editorText}
                   onChange={(value) => setEditorText(value)}
                   modules={modules} // Передайте конфигурацию модулей здесь
@@ -169,7 +170,11 @@ const PostModal = ({ user, showModal, handleClick, location }) => {
                   Anyone
                 </AssetButton>
               </ShareComment>
-              <PostButton disabled={!editorText ? true : false} onClick={(e) => createArticle(e)}>
+              <PostButton
+                disabled={!editorText ? true : false}
+                onClick={(e) => createArticle(e)}
+                aria-label="submit button"
+              >
                 Post
               </PostButton>
             </ShareCreation>

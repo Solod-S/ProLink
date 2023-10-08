@@ -1,11 +1,11 @@
 {
   "files": {
     "main.css": "/prolink/static/css/main.ca5c2863.css",
-    "main.js": "/prolink/static/js/main.4809083d.js",
-    "static/js/326.c049173e.chunk.js": "/prolink/static/js/326.c049173e.chunk.js",
-    "static/js/806.d2547bfb.chunk.js": "/prolink/static/js/806.d2547bfb.chunk.js",
-    "static/js/353.e09f3e42.chunk.js": "/prolink/static/js/353.e09f3e42.chunk.js",
-    "static/js/527.0066bc6c.chunk.js": "/prolink/static/js/527.0066bc6c.chunk.js",
+    "main.js": "/prolink/static/js/main.797cb98e.js",
+    "static/js/326.eb6c60b5.chunk.js": "/prolink/static/js/326.eb6c60b5.chunk.js",
+    "static/js/806.43708eac.chunk.js": "/prolink/static/js/806.43708eac.chunk.js",
+    "static/js/353.4e99ee1b.chunk.js": "/prolink/static/js/353.4e99ee1b.chunk.js",
+    "static/js/527.d32299b1.chunk.js": "/prolink/static/js/527.d32299b1.chunk.js",
     "static/media/spin-loader.gif": "/prolink/static/media/spin-loader.7569836f879cee464c5d.gif",
     "static/media/login-hero.svg": "/prolink/static/media/login-hero.b15a3029a65322f15c6c285c0d42ce29.svg",
     "static/media/banner.jpg": "/prolink/static/media/banner.7269a7784106e330b037.jpg",
@@ -49,14 +49,14 @@
     "static/media/share-video.svg": "/prolink/static/media/share-video.138770c998d788dfd7b2845569f2ddba.svg",
     "static/media/sendAction.svg": "/prolink/static/media/sendAction.a8547ecff94f38fce26d58617ea91d4c.svg",
     "main.ca5c2863.css.map": "/prolink/static/css/main.ca5c2863.css.map",
-    "main.4809083d.js.map": "/prolink/static/js/main.4809083d.js.map",
-    "326.c049173e.chunk.js.map": "/prolink/static/js/326.c049173e.chunk.js.map",
-    "806.d2547bfb.chunk.js.map": "/prolink/static/js/806.d2547bfb.chunk.js.map",
-    "353.e09f3e42.chunk.js.map": "/prolink/static/js/353.e09f3e42.chunk.js.map",
-    "527.0066bc6c.chunk.js.map": "/prolink/static/js/527.0066bc6c.chunk.js.map"
+    "main.797cb98e.js.map": "/prolink/static/js/main.797cb98e.js.map",
+    "326.eb6c60b5.chunk.js.map": "/prolink/static/js/326.eb6c60b5.chunk.js.map",
+    "806.43708eac.chunk.js.map": "/prolink/static/js/806.43708eac.chunk.js.map",
+    "353.4e99ee1b.chunk.js.map": "/prolink/static/js/353.4e99ee1b.chunk.js.map",
+    "527.d32299b1.chunk.js.map": "/prolink/static/js/527.d32299b1.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.ca5c2863.css",
-    "static/js/main.4809083d.js"
+    "static/js/main.797cb98e.js"
   ]
 }

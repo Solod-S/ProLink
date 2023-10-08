@@ -15,6 +15,9 @@ const myPostsSlice = createSlice({
         state.data = payload.data.posts;
         state.isRefreshing = false;
       })
+      .addCase(myPostsOperation.fetchMyPosts.rejected, (state, _) => {
+        state.isRefreshing = false;
+      })
       .addCase(myPostsOperation.deleteMyPost.pending, (state) => {
         state.isRefreshing = true;
       })
@@ -22,11 +25,17 @@ const myPostsSlice = createSlice({
         state.data = state.data.filter((p) => p._id !== payload);
         state.isRefreshing = false;
       })
+      .addCase(myPostsOperation.deleteMyPost.rejected, (state, _) => {
+        state.isRefreshing = false;
+      })
       .addCase(myPostsOperation.createMyPost.pending, (state) => {
         state.isRefreshing = true;
       })
       .addCase(myPostsOperation.createMyPost.fulfilled, (state, { payload }) => {
-        state.data = [...state.data, payload.data.post];
+        state.data = [payload.data.post, ...state.data];
+        state.isRefreshing = false;
+      })
+      .addCase(myPostsOperation.createMyPost.rejected, (state, _) => {
         state.isRefreshing = false;
       })
       .addCase(myPostsOperation.updateMyPost.pending, (state) => {
@@ -34,6 +43,9 @@ const myPostsSlice = createSlice({
       })
       .addCase(myPostsOperation.updateMyPost.fulfilled, (state, { payload }) => {
         state.data = state.data.map((p) => (p._id === payload.data.post._id ? payload.data.post : p));
+        state.isRefreshing = false;
+      })
+      .addCase(myPostsOperation.updateMyPost.rejected, (state, _) => {
         state.isRefreshing = false;
       })
       .addDefaultCase((state) => {

@@ -2,6 +2,7 @@ import { socialNetworkAxiosInstance } from "../axios/axios";
 
 export async function fetchMyPosts() {
   const { data } = await socialNetworkAxiosInstance.get(`/own-posts`);
+  console.log(data, "api");
   return data;
 }
 

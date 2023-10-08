@@ -51,7 +51,7 @@ export const createMyPost = createAsyncThunk("own-posts/add", async (body, thunk
           postId: postData.data.post._id,
         });
         console.log(cloudinaryData);
-        postData.data.post.mediaFiles = mediaFIleData.data.mediaFile;
+        postData.data.post.mediaFiles.push(mediaFIleData.data.mediaFile);
         toast.success(`Your post was successfully created`);
         return postData;
       }
@@ -64,12 +64,14 @@ export const createMyPost = createAsyncThunk("own-posts/add", async (body, thunk
           providerPublicId: "youtube",
           postId: postData.data.post._id,
         });
-        postData.data.post.mediaFiles = mediaFIleData.data.mediaFile;
+        postData.data.post.mediaFiles.push(mediaFIleData.data.mediaFile);
         toast.success(`Your post was successfully created`);
         return postData;
       }
     } else {
-      const data = await MyPostApi.createMyPost(body);
+      const { description } = body;
+
+      const data = await MyPostApi.createMyPost({ description });
       toast.success(`Your post was successfully created`);
       return data;
     }

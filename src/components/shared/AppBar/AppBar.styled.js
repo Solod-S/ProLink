@@ -101,6 +101,7 @@ export const NavListWrap = styled.ul`
       content: "";
       transform: scaleX(1);
       border-bottom: 1px solid var(--white, #fff);
+
       left: 0;
       bottom: 0;
       position: absolute;

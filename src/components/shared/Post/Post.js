@@ -18,7 +18,7 @@ import {
 
 const Post = ({ name, avatar, email, date, description, image, video, comments }) => {
   return (
-    <Article>
+    <Article data-testid="post">
       <SharedActor>
         <a href="/LinkedInClone/home" target="_blank" rel="noopener noreferrer">
           <img src={avatar} alt="user icon" />

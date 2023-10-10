@@ -78,7 +78,7 @@ describe("HomePage => Home Component Tests", () => {
       userEvent.click(startPostButton);
     });
 
-    // Checking that the modal window is displayed
+    // Checking that the modal window is enable
     await waitFor(() => {
       const modalTitle = screen.getByText("Create a post");
       expect(modalTitle).toBeInTheDocument();
@@ -141,7 +141,7 @@ describe("HomePage => Home Component Tests", () => {
       userEvent.click(startPostButton);
     });
 
-    // Checking that the modal window is displayed
+    // Checking that the modal window is enable
     await waitFor(() => {
       const modalTitle = screen.getByText("Create a post");
       expect(modalTitle).toBeInTheDocument();
@@ -245,7 +245,7 @@ describe("HomePage => Home Component Tests", () => {
       userEvent.click(startPostButton);
     });
 
-    // Checking that the modal window is displayed
+    // Checking that the modal window is enable
     await waitFor(() => {
       const modalTitle = screen.getByText("Create a post");
       expect(modalTitle).toBeInTheDocument();
@@ -346,7 +346,7 @@ describe("HomePage => Home Component Tests", () => {
       userEvent.click(startPostButton);
     });
 
-    // Checking that the modal window is displayed
+    // Checking that the modal window is enable
     await waitFor(() => {
       const modalTitle = screen.getByText("Create a post");
       expect(modalTitle).toBeInTheDocument();
@@ -379,6 +379,199 @@ describe("HomePage => Home Component Tests", () => {
     await waitFor(() => {
       const modalContent = screen.queryByText("Create a post");
       expect(modalContent).toBeInTheDocument();
+    });
+  });
+
+  it("Render posts data in post list", async () => {
+    const history = createMemoryHistory({ initialEntries: ["/home"] });
+
+    // Mock the user's state in the store
+    const loggedInState = {
+      auth: {
+        user: USER,
+        isloggedIn: true,
+        isRefreshing: false,
+      },
+      myPosts: {
+        data: [
+          {
+            _id: "post1",
+            description: "<p>Text 1</p>",
+            likes: [],
+            comments: [],
+            mediaFiles: [
+              {
+                _id: "media1",
+                type: "img",
+                location: "posts",
+                url: "https://res.cloudinary.com/dbclstp7c/image/upload/v1696878135/prolink/dylcpslizqxwdstlpqfm.jpg",
+                providerPublicId: "prolink/dylcpslizqxwdstlpqfm",
+                owner: {},
+                createdAt: "2023-10-09T19:02:17.416Z",
+                updatedAt: "2023-10-09T19:02:17.416Z",
+              },
+            ],
+            owner: {
+              _id: "6522726ca19ad950c3d37bf6",
+              name: "Sergey",
+              surname: "Nikolaevich",
+              email: "solik098@gmail.com",
+              phone: "",
+              site: "",
+              posts: [],
+              other1: "",
+              other2: "",
+              other3: "",
+              subscription: [],
+              favorite: [],
+              about: "",
+              experience: [],
+              education: [],
+              languages: [],
+              headLine: "",
+              frame: "Original",
+            },
+            postedAtHuman: "0 seconds ago",
+            createdAt: "2023-10-09T19:02:15.411Z",
+            updatedAt: "2023-10-09T19:02:15.411Z",
+          },
+          {
+            _id: "post2",
+            description: "<p>Text 2</p>",
+            likes: [],
+            comments: [],
+            mediaFiles: [
+              {
+                _id: "media1",
+                type: "img",
+                location: "posts",
+                url: "https://res.cloudinary.com/dbclstp7c/image/upload/v1696878135/prolink/dylcpslizqxwdstlpqfm.jpg",
+                providerPublicId: "prolink/dylcpslizqxwdstlpqfm",
+                owner: {},
+                createdAt: "2023-10-09T19:02:17.416Z",
+                updatedAt: "2023-10-09T19:02:17.416Z",
+              },
+            ],
+            owner: {
+              _id: "6522726ca19ad950c3d37bf6",
+              name: "Sergey",
+              surname: "Nikolaevich",
+              email: "solik098@gmail.com",
+              phone: "",
+              site: "",
+              posts: [],
+              other1: "",
+              other2: "",
+              other3: "",
+              subscription: [],
+              favorite: [],
+              about: "",
+              experience: [],
+              education: [],
+              languages: [],
+              headLine: "",
+              frame: "Original",
+            },
+            postedAtHuman: "0 seconds ago",
+            createdAt: "2023-10-09T19:02:15.411Z",
+            updatedAt: "2023-10-09T19:02:15.411Z",
+          },
+        ],
+        isRefreshing: false,
+      },
+    };
+
+    // Create a fake store with the desired state
+    const testStore = configureStore({
+      reducer: {
+        auth: (state = loggedInState.auth) => state,
+        myPosts: (state = loggedInState.myPosts) => state,
+      },
+    });
+
+    // eslint-disable-next-line testing-library/no-unnecessary-act
+    await act(async () => {
+      render(
+        <Provider store={testStore}>
+          <PersistGate loading={null} persistor={persistor}>
+            <ThemeProvider theme={theme}>
+              <MemoryRouter history={history}>
+                <App />
+              </MemoryRouter>
+            </ThemeProvider>
+          </PersistGate>
+        </Provider>
+      );
+    });
+
+    // Checking that the shareBox is enabled
+    await waitFor(() => {
+      const shareBox = screen.getByTestId("share-box");
+      expect(shareBox).toBeInTheDocument();
+    });
+
+    // Checking rendering one post by searching for unique text from the provided post
+    await waitFor(() => {
+      const postText = screen.getByText("Text 1");
+      expect(postText).toBeInTheDocument();
+    });
+    // Checking rendering posts list
+
+    await waitFor(() => {
+      const posts = screen.getAllByTestId("post");
+      expect(posts.length).toBeGreaterThan(0); // Check that at least one post is rendered
+    });
+  });
+
+  it("Render empty post list", async () => {
+    const history = createMemoryHistory({ initialEntries: ["/home"] });
+
+    // Mock the user's state in the store
+    const loggedInState = {
+      auth: {
+        user: USER,
+        isloggedIn: true,
+        isRefreshing: false,
+      },
+      myPosts: {
+        data: [],
+        isRefreshing: false,
+      },
+    };
+
+    // Create a fake store with the desired state
+    const testStore = configureStore({
+      reducer: {
+        auth: (state = loggedInState.auth) => state,
+        myPosts: (state = loggedInState.myPosts) => state,
+      },
+    });
+
+    // eslint-disable-next-line testing-library/no-unnecessary-act
+    await act(async () => {
+      render(
+        <Provider store={testStore}>
+          <PersistGate loading={null} persistor={persistor}>
+            <ThemeProvider theme={theme}>
+              <MemoryRouter history={history}>
+                <App />
+              </MemoryRouter>
+            </ThemeProvider>
+          </PersistGate>
+        </Provider>
+      );
+    });
+
+    // Checking that the shareBox is enabled
+    await waitFor(() => {
+      const shareBox = screen.getByTestId("share-box");
+      expect(shareBox).toBeInTheDocument();
+    });
+
+    // Checking that no posts are rendered
+    await waitFor(() => {
+      const posts = screen.queryAllByTestId("post");
+      expect(posts).toHaveLength(0); // Check that no posts are rendered
     });
   });
 });

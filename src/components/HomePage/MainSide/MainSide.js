@@ -33,7 +33,7 @@ const MainSide = () => {
   useEffect(() => {
     dispatch(fetchMyPosts());
     setposts(postsData);
-    console.log(postsData, "postsData");
+    console.log(postsData);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dispatch]);
 
@@ -43,7 +43,6 @@ const MainSide = () => {
 
   useEffect(() => {
     setuser(userData);
-    console.log(postsData);
     setposts(postsData);
   }, [dispatch, postsData, userData]);
 
@@ -71,8 +70,7 @@ const MainSide = () => {
     <>
       {posts && posts.length <= 0 ? (
         <Container>
-          <p>There are no posts</p>
-          <ShareBox>
+          <ShareBox data-testid="share-box">
             <div>
               {user?.avatarURL?.url ? (
                 <img src={user?.avatarURL?.url} alt="user icon" />
@@ -106,7 +104,7 @@ const MainSide = () => {
         </Container>
       ) : (
         <Container>
-          <ShareBox>
+          <ShareBox data-testid="share-box">
             <div>
               {user?.avatarURL?.url ? (
                 <img src={user?.avatarURL?.url} alt="user icon" />

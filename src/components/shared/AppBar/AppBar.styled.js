@@ -173,6 +173,9 @@ export const NavListProfileDropDown = styled.div`
 `;
 
 export const SignOut = styled.div`
+  @media (max-width: ${(p) => p.theme.breakpoints.tablet}) {
+    top: -45px;
+  }
   position: absolute;
   top: 45px;
   background-color: white;

@@ -13,6 +13,8 @@ import PostModal from "./shared/PostModal/PostModal";
 import RestorePassForm from "./passwordRestore/RestorePassForm";
 import Home from "./HomePage/Home/Home";
 import Post from "./shared/Post/Post";
+import MyNetwork from "./MyNetworkPage/MyNetwork/MyNetwork";
+import JobsMain from "./JobsPage/JobsMain/JobsMain";
 
 export {
   Login,
@@ -30,4 +32,6 @@ export {
   RestorePassForm,
   PostModal,
   Post,
+  MyNetwork,
+  JobsMain,
 };

@@ -574,4 +574,617 @@ describe("HomePage => Home Component Tests", () => {
       expect(posts).toHaveLength(0); // Check that no posts are rendered
     });
   });
+  it("Render post without media", async () => {
+    const history = createMemoryHistory({ initialEntries: ["/home"] });
+
+    // Mock the user's state in the store
+    const loggedInState = {
+      auth: {
+        user: USER,
+        isloggedIn: true,
+        isRefreshing: false,
+      },
+      myPosts: {
+        data: [
+          {
+            _id: "post1",
+            description: "<p>Text 1</p>",
+            likes: [],
+            comments: [],
+            mediaFiles: [],
+            owner: {
+              _id: "6522726ca19ad950c3d37bf6",
+              name: "Sergey",
+              surname: "Nikolaevich",
+              email: "solik098@gmail.com",
+              phone: "",
+              site: "",
+              posts: [],
+              other1: "",
+              other2: "",
+              other3: "",
+              subscription: [],
+              favorite: [],
+              about: "",
+              experience: [],
+              education: [],
+              languages: [],
+              headLine: "",
+              frame: "Original",
+            },
+            postedAtHuman: "0 seconds ago",
+            createdAt: "2023-10-09T19:02:15.411Z",
+            updatedAt: "2023-10-09T19:02:15.411Z",
+          },
+        ],
+        isRefreshing: false,
+      },
+    };
+
+    // Create a fake store with the desired state
+    const testStore = configureStore({
+      reducer: {
+        auth: (state = loggedInState.auth) => state,
+        myPosts: (state = loggedInState.myPosts) => state,
+      },
+    });
+
+    // eslint-disable-next-line testing-library/no-unnecessary-act
+    await act(async () => {
+      render(
+        <Provider store={testStore}>
+          <PersistGate loading={null} persistor={persistor}>
+            <ThemeProvider theme={theme}>
+              <MemoryRouter history={history}>
+                <App />
+              </MemoryRouter>
+            </ThemeProvider>
+          </PersistGate>
+        </Provider>
+      );
+    });
+
+    // Checking that the shareBox is enabled
+    await waitFor(() => {
+      const shareBox = screen.getByTestId("share-box");
+      expect(shareBox).toBeInTheDocument();
+    });
+
+    // Checking that post is rendered
+    await waitFor(() => {
+      const posts = screen.queryAllByTestId("post");
+      expect(posts.length).toBeGreaterThan(0);
+    });
+
+    // Checking post text
+    await waitFor(() => {
+      const posts = screen.queryByText("Text 1");
+      expect(posts).toBeInTheDocument();
+    });
+
+    // Checking user name in the post
+    await waitFor(() => {
+      const name = screen.getByTestId("name");
+      expect(name).toBeInTheDocument();
+    });
+
+    // Checking user name content in the post
+    await waitFor(() => {
+      const name = screen.getByTestId("name");
+      expect(name).toHaveTextContent(/Sergey Nikolaevich/i);
+    });
+
+    // Checking user email in the post
+    await waitFor(() => {
+      const email = screen.getByTestId("email");
+      expect(email).toBeInTheDocument();
+    });
+
+    // Checking user email data in the post
+    await waitFor(() => {
+      const email = screen.getByTestId("email");
+      expect(email).toHaveTextContent(/solik098@gmail.com/i);
+    });
+
+    // Checking date in the post
+    await waitFor(() => {
+      const date = screen.getByTestId("date");
+      expect(date).toBeInTheDocument();
+    });
+
+    // Checking date content in the post
+    await waitFor(() => {
+      const date = screen.getByTestId("date");
+      expect(date).toHaveTextContent(/seconds ago/i);
+    });
+
+    // Checking description in the post
+    await waitFor(() => {
+      const description = screen.getByTestId("description");
+      expect(description).toBeInTheDocument();
+    });
+
+    // Checking description content in the post
+    await waitFor(() => {
+      const description = screen.getByTestId("description");
+      expect(description).toContainHTML("<p>Text 1</p>");
+    });
+
+    // Checking media is empty in the post
+    await waitFor(() => {
+      const description = screen.getByTestId("media");
+      expect(description).toBeEmptyDOMElement();
+    });
+
+    // Checking Like btn contains text
+    await waitFor(() => {
+      const likeButton = screen.getByTestId("like-btn");
+      expect(likeButton).toContainElement(screen.getByText("Like"));
+    });
+
+    // Checking Like btn contains icon
+    await waitFor(() => {
+      const likeButton = screen.getByTestId("like-btn");
+      expect(likeButton).toContainElement(screen.getByAltText("likeAction icon"));
+    });
+
+    // Checking Comment btn contains text
+    await waitFor(() => {
+      const CommentBtn = screen.getByTestId("comment-btn");
+      expect(CommentBtn).toContainElement(screen.getByText("Comments"));
+    });
+
+    // Checking Comment btn contains icon
+    await waitFor(() => {
+      const CommentBtn = screen.getByTestId("comment-btn");
+      expect(CommentBtn).toContainElement(screen.getByAltText("commentAction icon"));
+    });
+
+    // Checking Report btn contains text
+    await waitFor(() => {
+      const CommentBtn = screen.getByTestId("report-btn");
+      expect(CommentBtn).toContainElement(screen.getByText("Report"));
+    });
+
+    // Checking Report btn contains icon
+    await waitFor(() => {
+      const CommentBtn = screen.getByTestId("report-btn");
+      expect(CommentBtn).toContainElement(screen.getByAltText("reportAction icon"));
+    });
+
+    // Checking Send btn contains text
+    await waitFor(() => {
+      const SendtBtn = screen.getByTestId("send-btn");
+      expect(SendtBtn).toContainElement(screen.getByText("Send"));
+    });
+
+    // Checking Send btn contains icon
+    await waitFor(() => {
+      const SendtBtn = screen.getByTestId("send-btn");
+      expect(SendtBtn).toContainElement(screen.getByAltText("sendAction icon"));
+    });
+  });
+  it("Render post with media (photo)", async () => {
+    const history = createMemoryHistory({ initialEntries: ["/home"] });
+
+    // Mock the user's state in the store
+    const loggedInState = {
+      auth: {
+        user: USER,
+        isloggedIn: true,
+        isRefreshing: false,
+      },
+      myPosts: {
+        data: [
+          {
+            _id: "post1",
+            description: "<p>Text 1</p>",
+            likes: [],
+            comments: [],
+            mediaFiles: [
+              {
+                _id: "media1",
+                type: "img",
+                location: "posts",
+                url: "https://res.cloudinary.com/dbclstp7c/image/upload/v1696878135/prolink/dylcpslizqxwdstlpqfm.jpg",
+                providerPublicId: "prolink/dylcpslizqxwdstlpqfm",
+                owner: {},
+                createdAt: "2023-10-09T19:02:17.416Z",
+                updatedAt: "2023-10-09T19:02:17.416Z",
+              },
+            ],
+            owner: {
+              _id: "6522726ca19ad950c3d37bf6",
+              name: "Sergey",
+              surname: "Nikolaevich",
+              email: "solik098@gmail.com",
+              phone: "",
+              site: "",
+              posts: [],
+              other1: "",
+              other2: "",
+              other3: "",
+              subscription: [],
+              favorite: [],
+              about: "",
+              experience: [],
+              education: [],
+              languages: [],
+              headLine: "",
+              frame: "Original",
+            },
+            postedAtHuman: "0 seconds ago",
+            createdAt: "2023-10-09T19:02:15.411Z",
+            updatedAt: "2023-10-09T19:02:15.411Z",
+          },
+        ],
+        isRefreshing: false,
+      },
+    };
+
+    // Create a fake store with the desired state
+    const testStore = configureStore({
+      reducer: {
+        auth: (state = loggedInState.auth) => state,
+        myPosts: (state = loggedInState.myPosts) => state,
+      },
+    });
+
+    // eslint-disable-next-line testing-library/no-unnecessary-act
+    await act(async () => {
+      render(
+        <Provider store={testStore}>
+          <PersistGate loading={null} persistor={persistor}>
+            <ThemeProvider theme={theme}>
+              <MemoryRouter history={history}>
+                <App />
+              </MemoryRouter>
+            </ThemeProvider>
+          </PersistGate>
+        </Provider>
+      );
+    });
+
+    // Checking that the shareBox is enabled
+    await waitFor(() => {
+      const shareBox = screen.getByTestId("share-box");
+      expect(shareBox).toBeInTheDocument();
+    });
+
+    // Checking that post is rendered
+    await waitFor(() => {
+      const posts = screen.queryAllByTestId("post");
+      expect(posts.length).toBeGreaterThan(0);
+    });
+
+    // Checking post text
+    await waitFor(() => {
+      const posts = screen.queryByText("Text 1");
+      expect(posts).toBeInTheDocument();
+    });
+
+    // Checking user name in the post
+    await waitFor(() => {
+      const name = screen.getByTestId("name");
+      expect(name).toBeInTheDocument();
+    });
+
+    // Checking user name content in the post
+    await waitFor(() => {
+      const name = screen.getByTestId("name");
+      expect(name).toHaveTextContent(/Sergey Nikolaevich/i);
+    });
+
+    // Checking user email in the post
+    await waitFor(() => {
+      const email = screen.getByTestId("email");
+      expect(email).toBeInTheDocument();
+    });
+
+    // Checking user email data in the post
+    await waitFor(() => {
+      const email = screen.getByTestId("email");
+      expect(email).toHaveTextContent(/solik098@gmail.com/i);
+    });
+
+    // Checking date in the post
+    await waitFor(() => {
+      const date = screen.getByTestId("date");
+      expect(date).toBeInTheDocument();
+    });
+
+    // Checking date content in the post
+    await waitFor(() => {
+      const date = screen.getByTestId("date");
+      expect(date).toHaveTextContent(/seconds ago/i);
+    });
+
+    // Checking description in the post
+    await waitFor(() => {
+      const description = screen.getByTestId("description");
+      expect(description).toBeInTheDocument();
+    });
+
+    // Checking description content in the post
+    await waitFor(() => {
+      const description = screen.getByTestId("description");
+      expect(description).toContainHTML("<p>Text 1</p>");
+    });
+
+    // Checking img in post
+    await waitFor(() => {
+      const mediaContainer = screen.getByTestId("media");
+      expect(mediaContainer).toContainElement(screen.getByAltText("shared"));
+    });
+
+    // Checking Like btn contains text
+    await waitFor(() => {
+      const likeButton = screen.getByTestId("like-btn");
+      expect(likeButton).toContainElement(screen.getByText("Like"));
+    });
+
+    // Checking Like btn contains icon
+    await waitFor(() => {
+      const likeButton = screen.getByTestId("like-btn");
+      expect(likeButton).toContainElement(screen.getByAltText("likeAction icon"));
+    });
+
+    // Checking Comment btn contains text
+    await waitFor(() => {
+      const CommentBtn = screen.getByTestId("comment-btn");
+      expect(CommentBtn).toContainElement(screen.getByText("Comments"));
+    });
+
+    // Checking Comment btn contains icon
+    await waitFor(() => {
+      const CommentBtn = screen.getByTestId("comment-btn");
+      expect(CommentBtn).toContainElement(screen.getByAltText("commentAction icon"));
+    });
+
+    // Checking Report btn contains text
+    await waitFor(() => {
+      const CommentBtn = screen.getByTestId("report-btn");
+      expect(CommentBtn).toContainElement(screen.getByText("Report"));
+    });
+
+    // Checking Report btn contains icon
+    await waitFor(() => {
+      const CommentBtn = screen.getByTestId("report-btn");
+      expect(CommentBtn).toContainElement(screen.getByAltText("reportAction icon"));
+    });
+
+    // Checking Send btn contains text
+    await waitFor(() => {
+      const SendtBtn = screen.getByTestId("send-btn");
+      expect(SendtBtn).toContainElement(screen.getByText("Send"));
+    });
+
+    // Checking Send btn contains icon
+    await waitFor(() => {
+      const SendtBtn = screen.getByTestId("send-btn");
+      expect(SendtBtn).toContainElement(screen.getByAltText("sendAction icon"));
+    });
+  });
+  it("Render post with media (video)", async () => {
+    const history = createMemoryHistory({ initialEntries: ["/home"] });
+
+    // Mock the user's state in the store
+    const loggedInState = {
+      auth: {
+        user: USER,
+        isloggedIn: true,
+        isRefreshing: false,
+      },
+      myPosts: {
+        data: [
+          {
+            _id: "post1",
+            description: "<p>Text 1</p>",
+            likes: [],
+            comments: [],
+            mediaFiles: [
+              {
+                _id: "media1",
+                type: "video",
+                location: "posts",
+                url: "https://www.youtube.com/watch?v=L2RnP5vhbdg",
+                providerPublicId: "prolink/dylcpslizqxwdstlpqfm",
+                owner: {},
+                createdAt: "2023-10-09T19:02:17.416Z",
+                updatedAt: "2023-10-09T19:02:17.416Z",
+              },
+            ],
+            owner: {
+              _id: "6522726ca19ad950c3d37bf6",
+              name: "Sergey",
+              surname: "Nikolaevich",
+              email: "solik098@gmail.com",
+              phone: "",
+              site: "",
+              posts: [],
+              other1: "",
+              other2: "",
+              other3: "",
+              subscription: [],
+              favorite: [],
+              about: "",
+              experience: [],
+              education: [],
+              languages: [],
+              headLine: "",
+              frame: "Original",
+            },
+            postedAtHuman: "0 seconds ago",
+            createdAt: "2023-10-09T19:02:15.411Z",
+            updatedAt: "2023-10-09T19:02:15.411Z",
+          },
+        ],
+        isRefreshing: false,
+      },
+    };
+
+    // Create a fake store with the desired state
+    const testStore = configureStore({
+      reducer: {
+        auth: (state = loggedInState.auth) => state,
+        myPosts: (state = loggedInState.myPosts) => state,
+      },
+    });
+
+    // eslint-disable-next-line testing-library/no-unnecessary-act
+    await act(async () => {
+      render(
+        <Provider store={testStore}>
+          <PersistGate loading={null} persistor={persistor}>
+            <ThemeProvider theme={theme}>
+              <MemoryRouter history={history}>
+                <App />
+              </MemoryRouter>
+            </ThemeProvider>
+          </PersistGate>
+        </Provider>
+      );
+    });
+
+    // Checking that the shareBox is enabled
+    await waitFor(() => {
+      const shareBox = screen.getByTestId("share-box");
+      expect(shareBox).toBeInTheDocument();
+    });
+
+    // Checking that post is rendered
+    await waitFor(() => {
+      const posts = screen.queryAllByTestId("post");
+      expect(posts.length).toBeGreaterThan(0);
+    });
+
+    // Checking post text
+    await waitFor(() => {
+      const posts = screen.queryByText("Text 1");
+      expect(posts).toBeInTheDocument();
+    });
+
+    // Checking user name in the post
+    await waitFor(() => {
+      const name = screen.getByTestId("name");
+      expect(name).toBeInTheDocument();
+    });
+
+    // Checking user name content in the post
+    await waitFor(() => {
+      const name = screen.getByTestId("name");
+      expect(name).toHaveTextContent(/Sergey Nikolaevich/i);
+    });
+
+    // Checking user email in the post
+    await waitFor(() => {
+      const email = screen.getByTestId("email");
+      expect(email).toBeInTheDocument();
+    });
+
+    // Checking user email data in the post
+    await waitFor(() => {
+      const email = screen.getByTestId("email");
+      expect(email).toHaveTextContent(/solik098@gmail.com/i);
+    });
+
+    // Checking date in the post
+    await waitFor(() => {
+      const date = screen.getByTestId("date");
+      expect(date).toBeInTheDocument();
+    });
+
+    // Checking date content in the post
+    await waitFor(() => {
+      const date = screen.getByTestId("date");
+      expect(date).toHaveTextContent(/seconds ago/i);
+    });
+
+    // Checking description in the post
+    await waitFor(() => {
+      const description = screen.getByTestId("description");
+      expect(description).toBeInTheDocument();
+    });
+
+    // Checking description content in the post
+    await waitFor(() => {
+      const description = screen.getByTestId("description");
+      expect(description).toContainHTML("<p>Text 1</p>");
+    });
+
+    // Checking video in post
+    await waitFor(() => {
+      const mediaContainer = screen.getByTestId("media");
+      expect(mediaContainer).toContainElement(screen.getByTestId("video"));
+    });
+
+    // Checking Like btn contains text
+    await waitFor(() => {
+      const likeButton = screen.getByTestId("like-btn");
+      expect(likeButton).toContainElement(screen.getByText("Like"));
+    });
+
+    // Checking Like btn contains icon
+    await waitFor(() => {
+      const likeButton = screen.getByTestId("like-btn");
+      expect(likeButton).toContainElement(screen.getByAltText("likeAction icon"));
+    });
+
+    // Checking Comment btn contains text
+    await waitFor(() => {
+      const CommentBtn = screen.getByTestId("comment-btn");
+      expect(CommentBtn).toContainElement(screen.getByText("Comments"));
+    });
+
+    // Checking Comment btn contains icon
+    await waitFor(() => {
+      const CommentBtn = screen.getByTestId("comment-btn");
+      expect(CommentBtn).toContainElement(screen.getByAltText("commentAction icon"));
+    });
+
+    // Checking Report btn contains text
+    await waitFor(() => {
+      const CommentBtn = screen.getByTestId("report-btn");
+      expect(CommentBtn).toContainElement(screen.getByText("Report"));
+    });
+
+    // Checking Report btn contains icon
+    await waitFor(() => {
+      const CommentBtn = screen.getByTestId("report-btn");
+      expect(CommentBtn).toContainElement(screen.getByAltText("reportAction icon"));
+    });
+
+    // Checking Send btn contains text
+    await waitFor(() => {
+      const SendtBtn = screen.getByTestId("send-btn");
+      expect(SendtBtn).toContainElement(screen.getByText("Send"));
+    });
+
+    // Checking Send btn contains icon
+    await waitFor(() => {
+      const SendtBtn = screen.getByTestId("send-btn");
+      expect(SendtBtn).toContainElement(screen.getByAltText("sendAction icon"));
+    });
+  });
 });
+
+// const USER = {
+//   _id: "6515113799685684d8c43d5f",
+//   name: "Sergey",
+//   surname: "Nikolaevich",
+//   email: "solik098@gmail.com",
+//   favorite: [],
+//   posts: [],
+//   subscription: [],
+//   phone: "",
+//   site: "",
+//   other1: "",
+//   other2: "",
+//   other3: "",
+//   about: "",
+//   experience: {},
+//   education: {},
+//   languages: {},
+//   headLine: "",
+//   frame: "Original",
+// };

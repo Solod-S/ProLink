@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunkprolink=self.webpackChunkprolink||[]).push([[527],{3527:function(e,n,t){t.r(n);var r=t(9439),s=t(2791),u=t(7689),a=t(1087),c=t(3642),f=t(184);n.default=function(){var e=(0,s.useState)(""),n=(0,r.Z)(e,2),t=n[0],i=n[1],o=(0,a.lr)(),k=(0,r.Z)(o,1)[0],l=(0,u.s0)();return(0,s.useEffect)((function(){var e=k.get("resettoken");return e?i(e):l("/login"),function(){i("")}}),[l,k,t]),(0,f.jsx)(f.Fragment,{children:t?(0,f.jsx)(c.GZ,{resetToken:t}):(0,f.jsx)(c.aN,{})})}}}]);
+//# sourceMappingURL=527.208f2f31.chunk.js.map

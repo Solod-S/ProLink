@@ -1,0 +1,1 @@
+{"version":3,"file":"static/js/235.92bdfbcb.chunk.js","mappings":"qIAMA,UAJiB,WACf,OAAOA,EAAAA,EAAAA,KAACC,EAAAA,GAAS,GACnB,C","sources":["pages/JobsPage/JobsPage.js"],"sourcesContent":["import { MyNetwork } from \"../../components\";\n\nconst JobsPage = () => {\n  return <MyNetwork />;\n};\n\nexport default JobsPage;\n"],"names":["_jsx","MyNetwork"],"sourceRoot":""}

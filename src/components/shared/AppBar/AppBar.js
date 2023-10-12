@@ -59,7 +59,7 @@ const AppBar = (props) => {
         </Search>
         <Nav>
           <NavListWrap>
-            <NavListItem className="active">
+            <NavListItem>
               <NavLink to="/home">
                 <img src={navHome} alt="navigation-home icon" />
                 <span>Home</span>
@@ -105,17 +105,20 @@ const AppBar = (props) => {
                 </span>
               </NavListProfileDropDown>
               <SignOut onClick={() => dispatch(logOut())}>
-                <button>Sign Out</button>
+                <div>
+                  <button>Options</button>
+                  <button>Sign Out</button>
+                </div>
               </SignOut>
             </User>
             <Work>
-              <a href="/LinkedInClone/home">
+              <NavListProfileDropDown>
                 <img src={navWork} alt="navigation-work icon" />
                 <span>
                   Work
                   <img src={dpopDownMenu} alt="dpop-down menu icon" />
                 </span>
-              </a>
+              </NavListProfileDropDown>
             </Work>
           </NavListWrap>
         </Nav>

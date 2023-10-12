@@ -8,6 +8,8 @@ import { useAuth } from "../hooks";
 
 const LoginPage = lazy(() => import("../pages/LoginPage/LoginPage"));
 const HomePage = lazy(() => import("../pages/HomePage/HomePage"));
+const JobsPage = lazy(() => import("../pages/JobsPage/JobsPage"));
+const MyNetworkPage = lazy(() => import("../pages/MyNetworkPage/MyNetworkPage"));
 const RedirectSocialPage = lazy(() => import("../pages/RedirectSocialPage/RedirectSocialPage"));
 const PasswordRestorePage = lazy(() => import("../pages/PasswordRestorePage/PasswordRestorePage"));
 
@@ -38,8 +40,10 @@ const UserRoutes = () => {
           <Route path="*" element={<Navigate to="/login" />} />
         </Route>
         <Route element={<PrivateRoute />}>
-          <Route path="/" element={<SharedLayout />}>
+          <Route end path="/" element={<SharedLayout />}>
             <Route index path="/home" element={<HomePage />} />
+            <Route index path="/my-network" element={<MyNetworkPage />} />
+            <Route index path="/jobs" element={<JobsPage />} />
             <Route path="*" element={<Navigate to="/home" />} />
           </Route>
         </Route>

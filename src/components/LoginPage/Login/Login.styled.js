@@ -57,7 +57,7 @@ export const Joint = styled(NavLink)`
   }
 
   @media (max-width: ${(p) => p.theme.breakpoints.tablet}) {
-    padding: 0 5px;
+    padding: 8 6px;
   }
 `;
 export const SignIn = styled(NavLink)`
@@ -81,7 +81,7 @@ export const SignIn = styled(NavLink)`
   }
 
   @media (max-width: ${(p) => p.theme.breakpoints.tablet}) {
-    padding: 3px 5px;
+    padding: 8px 6px;
   }
 `;
 
@@ -108,7 +108,7 @@ export const SocialLogin = styled.a`
   }
 
   @media (max-width: ${(p) => p.theme.breakpoints.tablet}) {
-    padding: 3px 5px;
+    padding: 8px 6px;
   }
 `;
 
@@ -169,6 +169,9 @@ export const Form = styled.div`
   @media (max-width: ${(p) => p.theme.breakpoints.tablet}) {
     padding-left: 0;
     margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
 `;
 export const SocialBtn = styled.a`
@@ -194,5 +197,8 @@ export const SocialBtn = styled.a`
   &:hover {
     background-color: rgb(207, 207, 207, 0.25);
     color: rgb(0, 0, 0, 0.75);
+  }
+  @media (max-width: ${(p) => p.theme.breakpoints.tablet}) {
+    width: 90%;
   }
 `;
